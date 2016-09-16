@@ -8,12 +8,52 @@
 
 /* Begin PBXBuildFile section */
 		4C2EAED81D584D870059072A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EAED71D584D870059072A /* AppDelegate.swift */; };
-		4C2EAEDA1D584D870059072A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EAED91D584D870059072A /* ViewController.swift */; };
+		4C2EAEDA1D584D870059072A /* viewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EAED91D584D870059072A /* viewController.swift */; };
 		4C2EAEDD1D584D870059072A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C2EAEDB1D584D870059072A /* Main.storyboard */; };
 		4C2EAEDF1D584D870059072A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C2EAEDE1D584D870059072A /* Assets.xcassets */; };
 		4C2EAEE21D584D870059072A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4C2EAEE01D584D870059072A /* LaunchScreen.storyboard */; };
 		4C2EAEED1D584D870059072A /* TeamGraysonGoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EAEEC1D584D870059072A /* TeamGraysonGoTests.swift */; };
 		4C2EAEF81D584D870059072A /* TeamGraysonGoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EAEF71D584D870059072A /* TeamGraysonGoUITests.swift */; };
+		4C2EAF061D5AAB7B0059072A /* GarageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EAF051D5AAB7B0059072A /* GarageContentViewController.swift */; };
+		4C2EAF081D5AB3150059072A /* GarageModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EAF071D5AB3150059072A /* GarageModelProtocol.swift */; };
+		4C2EAF0A1D5AB3B10059072A /* GarageModelObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EAF091D5AB3B10059072A /* GarageModelObj.swift */; };
+		4C35E7D01D7CE34300943286 /* hangoutSpecificViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C35E7CF1D7CE34300943286 /* hangoutSpecificViewController.swift */; };
+		4C5E32231D78F6A10079CFB7 /* AddHangoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E32221D78F6A10079CFB7 /* AddHangoutViewController.swift */; };
+		4C759D0F1D83C0F6006B95E1 /* SpecificHangoutModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C759D0E1D83C0F6006B95E1 /* SpecificHangoutModelProtocol.swift */; };
+		4C759D111D84D548006B95E1 /* GooglePlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D101D84D548006B95E1 /* GooglePlaces.framework */; };
+		4C759D131D84D574006B95E1 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D121D84D574006B95E1 /* GoogleMapsBase.framework */; };
+		4C759D151D84D5E5006B95E1 /* GooglePlaces.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4C759D141D84D5E5006B95E1 /* GooglePlaces.bundle */; };
+		4C759D171D84D642006B95E1 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D161D84D642006B95E1 /* Accelerate.framework */; };
+		4C759D191D84D654006B95E1 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D181D84D654006B95E1 /* CoreData.framework */; };
+		4C759D1B1D84D65A006B95E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D1A1D84D65A006B95E1 /* CoreGraphics.framework */; };
+		4C759D1D1D84D665006B95E1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D1C1D84D665006B95E1 /* CoreLocation.framework */; };
+		4C759D1F1D84D66B006B95E1 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D1E1D84D66B006B95E1 /* CoreText.framework */; };
+		4C759D211D84D67D006B95E1 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D201D84D67D006B95E1 /* GLKit.framework */; };
+		4C759D231D84D687006B95E1 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D221D84D687006B95E1 /* ImageIO.framework */; };
+		4C759D251D84D69B006B95E1 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D241D84D69B006B95E1 /* libc++.tbd */; };
+		4C759D271D84D6B2006B95E1 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D261D84D6B2006B95E1 /* libz.tbd */; };
+		4C759D291D84D6C2006B95E1 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D281D84D6C2006B95E1 /* OpenGLES.framework */; };
+		4C759D2B1D84D6CF006B95E1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D2A1D84D6CF006B95E1 /* QuartzCore.framework */; };
+		4C759D2D1D84D6DE006B95E1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D2C1D84D6DE006B95E1 /* SystemConfiguration.framework */; };
+		4C759D2F1D84D6E3006B95E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D2E1D84D6E3006B95E1 /* UIKit.framework */; };
+		4C759D311D84DDD9006B95E1 /* GooglePlacePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D301D84DDD9006B95E1 /* GooglePlacePicker.framework */; };
+		4C759D341D84DE11006B95E1 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D321D84DE11006B95E1 /* GoogleMaps.framework */; };
+		4C759D351D84DE11006B95E1 /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D331D84DE11006B95E1 /* GoogleMapsCore.framework */; };
+		4C759D371D84DE44006B95E1 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4C759D361D84DE44006B95E1 /* GoogleMaps.bundle */; };
+		4C759D391D84DE82006B95E1 /* GooglePlacePicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4C759D381D84DE82006B95E1 /* GooglePlacePicker.bundle */; };
+		4CE7E6DD1D6123E7009CD2C3 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6DC1D6123E7009CD2C3 /* SWRevealViewController.m */; };
+		4CE7E6DF1D629C43009CD2C3 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6DE1D629C43009CD2C3 /* MenuController.swift */; };
+		4CE7E6E41D62D012009CD2C3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE7E6E31D62D012009CD2C3 /* FBSDKShareKit.framework */; };
+		4CE7E6E61D62D1C3009CD2C3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE7E6E51D62D1C3009CD2C3 /* FBSDKCoreKit.framework */; };
+		4CE7E6E81D62E7B2009CD2C3 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE7E6E71D62E7B2009CD2C3 /* Bolts.framework */; };
+		4CE7E6EA1D62E7BF009CD2C3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE7E6E91D62E7BF009CD2C3 /* FBSDKLoginKit.framework */; };
+		4CE7E6EC1D62E91E009CD2C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6EB1D62E91E009CD2C3 /* LoginViewController.swift */; };
+		4CE7E6F01D652949009CD2C3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6EF1D652949009CD2C3 /* Reachability.m */; };
+		4CE7E6F21D6D5D5C009CD2C3 /* hangoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6F11D6D5D5C009CD2C3 /* hangoutsViewController.swift */; };
+		4CE7E6F41D6E0B7A009CD2C3 /* HangoutsModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6F31D6E0B7A009CD2C3 /* HangoutsModelProtocol.swift */; };
+		4CE7E6F61D6E0DC0009CD2C3 /* HangoutModelObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6F51D6E0DC0009CD2C3 /* HangoutModelObj.swift */; };
+		4CE7E6F81D6E2C9B009CD2C3 /* CustomHangoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6F71D6E2C9B009CD2C3 /* CustomHangoutCell.swift */; };
+		4CE7E6FA1D78DBB0009CD2C3 /* StreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6F91D78DBB0009CD2C3 /* StreamViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +76,7 @@
 /* Begin PBXFileReference section */
 		4C2EAED41D584D870059072A /* TeamGraysonGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TeamGraysonGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C2EAED71D584D870059072A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4C2EAED91D584D870059072A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4C2EAED91D584D870059072A /* viewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewController.swift; sourceTree = "<group>"; };
 		4C2EAEDC1D584D870059072A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4C2EAEDE1D584D870059072A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4C2EAEE11D584D870059072A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +87,49 @@
 		4C2EAEF31D584D870059072A /* TeamGraysonGoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TeamGraysonGoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C2EAEF71D584D870059072A /* TeamGraysonGoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamGraysonGoUITests.swift; sourceTree = "<group>"; };
 		4C2EAEF91D584D870059072A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4C2EAF051D5AAB7B0059072A /* GarageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageContentViewController.swift; sourceTree = "<group>"; };
+		4C2EAF071D5AB3150059072A /* GarageModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageModelProtocol.swift; sourceTree = "<group>"; };
+		4C2EAF091D5AB3B10059072A /* GarageModelObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageModelObj.swift; sourceTree = "<group>"; };
+		4C35E7CF1D7CE34300943286 /* hangoutSpecificViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hangoutSpecificViewController.swift; sourceTree = "<group>"; };
+		4C5E32221D78F6A10079CFB7 /* AddHangoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddHangoutViewController.swift; sourceTree = "<group>"; };
+		4C759D0E1D83C0F6006B95E1 /* SpecificHangoutModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecificHangoutModelProtocol.swift; sourceTree = "<group>"; };
+		4C759D101D84D548006B95E1 /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlaces.framework; sourceTree = "<group>"; };
+		4C759D121D84D574006B95E1 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsBase.framework; sourceTree = "<group>"; };
+		4C759D141D84D5E5006B95E1 /* GooglePlaces.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlaces.bundle; path = GooglePlaces.framework/Versions/A/Resources/GooglePlaces.bundle; sourceTree = "<group>"; };
+		4C759D161D84D642006B95E1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		4C759D181D84D654006B95E1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		4C759D1A1D84D65A006B95E1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		4C759D1C1D84D665006B95E1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4C759D1E1D84D66B006B95E1 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		4C759D201D84D67D006B95E1 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		4C759D221D84D687006B95E1 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		4C759D241D84D69B006B95E1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		4C759D261D84D6B2006B95E1 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		4C759D281D84D6C2006B95E1 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		4C759D2A1D84D6CF006B95E1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4C759D2C1D84D6DE006B95E1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		4C759D2E1D84D6E3006B95E1 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		4C759D301D84DDD9006B95E1 /* GooglePlacePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlacePicker.framework; sourceTree = "<group>"; };
+		4C759D321D84DE11006B95E1 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		4C759D331D84DE11006B95E1 /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsCore.framework; sourceTree = "<group>"; };
+		4C759D361D84DE44006B95E1 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
+		4C759D381D84DE82006B95E1 /* GooglePlacePicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlacePicker.bundle; path = GooglePlacePicker.framework/Versions/A/Resources/GooglePlacePicker.bundle; sourceTree = "<group>"; };
+		4CE7E6DA1D6123E6009CD2C3 /* TeamGraysonGo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TeamGraysonGo-Bridging-Header.h"; sourceTree = "<group>"; };
+		4CE7E6DB1D6123E7009CD2C3 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		4CE7E6DC1D6123E7009CD2C3 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		4CE7E6DE1D629C43009CD2C3 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
+		4CE7E6E31D62D012009CD2C3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		4CE7E6E51D62D1C3009CD2C3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		4CE7E6E71D62E7B2009CD2C3 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		4CE7E6E91D62E7BF009CD2C3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		4CE7E6EB1D62E91E009CD2C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		4CE7E6EE1D652949009CD2C3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		4CE7E6EF1D652949009CD2C3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		4CE7E6F11D6D5D5C009CD2C3 /* hangoutsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hangoutsViewController.swift; sourceTree = "<group>"; };
+		4CE7E6F31D6E0B7A009CD2C3 /* HangoutsModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HangoutsModelProtocol.swift; sourceTree = "<group>"; };
+		4CE7E6F51D6E0DC0009CD2C3 /* HangoutModelObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HangoutModelObj.swift; sourceTree = "<group>"; };
+		4CE7E6F71D6E2C9B009CD2C3 /* CustomHangoutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHangoutCell.swift; sourceTree = "<group>"; };
+		4CE7E6F91D78DBB0009CD2C3 /* StreamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +137,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C759D2F1D84D6E3006B95E1 /* UIKit.framework in Frameworks */,
+				4C759D2D1D84D6DE006B95E1 /* SystemConfiguration.framework in Frameworks */,
+				4C759D2B1D84D6CF006B95E1 /* QuartzCore.framework in Frameworks */,
+				4C759D351D84DE11006B95E1 /* GoogleMapsCore.framework in Frameworks */,
+				4C759D291D84D6C2006B95E1 /* OpenGLES.framework in Frameworks */,
+				4C759D271D84D6B2006B95E1 /* libz.tbd in Frameworks */,
+				4C759D251D84D69B006B95E1 /* libc++.tbd in Frameworks */,
+				4C759D231D84D687006B95E1 /* ImageIO.framework in Frameworks */,
+				4C759D311D84DDD9006B95E1 /* GooglePlacePicker.framework in Frameworks */,
+				4C759D211D84D67D006B95E1 /* GLKit.framework in Frameworks */,
+				4C759D1F1D84D66B006B95E1 /* CoreText.framework in Frameworks */,
+				4C759D1D1D84D665006B95E1 /* CoreLocation.framework in Frameworks */,
+				4C759D1B1D84D65A006B95E1 /* CoreGraphics.framework in Frameworks */,
+				4C759D191D84D654006B95E1 /* CoreData.framework in Frameworks */,
+				4C759D171D84D642006B95E1 /* Accelerate.framework in Frameworks */,
+				4CE7E6E81D62E7B2009CD2C3 /* Bolts.framework in Frameworks */,
+				4C759D341D84DE11006B95E1 /* GoogleMaps.framework in Frameworks */,
+				4CE7E6E41D62D012009CD2C3 /* FBSDKShareKit.framework in Frameworks */,
+				4CE7E6EA1D62E7BF009CD2C3 /* FBSDKLoginKit.framework in Frameworks */,
+				4C759D131D84D574006B95E1 /* GoogleMapsBase.framework in Frameworks */,
+				4CE7E6E61D62D1C3009CD2C3 /* FBSDKCoreKit.framework in Frameworks */,
+				4C759D111D84D548006B95E1 /* GooglePlaces.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +182,19 @@
 		4C2EAECB1D584D870059072A = {
 			isa = PBXGroup;
 			children = (
+				4C759D2E1D84D6E3006B95E1 /* UIKit.framework */,
+				4C759D2C1D84D6DE006B95E1 /* SystemConfiguration.framework */,
+				4C759D2A1D84D6CF006B95E1 /* QuartzCore.framework */,
+				4C759D281D84D6C2006B95E1 /* OpenGLES.framework */,
+				4C759D261D84D6B2006B95E1 /* libz.tbd */,
+				4C759D241D84D69B006B95E1 /* libc++.tbd */,
+				4C759D221D84D687006B95E1 /* ImageIO.framework */,
+				4C759D201D84D67D006B95E1 /* GLKit.framework */,
+				4C759D1E1D84D66B006B95E1 /* CoreText.framework */,
+				4C759D1C1D84D665006B95E1 /* CoreLocation.framework */,
+				4C759D1A1D84D65A006B95E1 /* CoreGraphics.framework */,
+				4C759D181D84D654006B95E1 /* CoreData.framework */,
+				4C759D161D84D642006B95E1 /* Accelerate.framework */,
 				4C2EAED61D584D870059072A /* TeamGraysonGo */,
 				4C2EAEEB1D584D870059072A /* TeamGraysonGoTests */,
 				4C2EAEF61D584D870059072A /* TeamGraysonGoUITests */,
@@ -97,9 +215,29 @@
 		4C2EAED61D584D870059072A /* TeamGraysonGo */ = {
 			isa = PBXGroup;
 			children = (
+				4CE7E6E01D62CF8D009CD2C3 /* Frameworks */,
+				4CE7E6D91D61237C009CD2C3 /* SWRevealViewController */,
+				4CE7E6ED1D652917009CD2C3 /* Reachability */,
 				4C2EAED71D584D870059072A /* AppDelegate.swift */,
-				4C2EAED91D584D870059072A /* ViewController.swift */,
+				4C759D361D84DE44006B95E1 /* GoogleMaps.bundle */,
+				4C759D141D84D5E5006B95E1 /* GooglePlaces.bundle */,
+				4C759D381D84DE82006B95E1 /* GooglePlacePicker.bundle */,
 				4C2EAEDB1D584D870059072A /* Main.storyboard */,
+				4CE7E6DA1D6123E6009CD2C3 /* TeamGraysonGo-Bridging-Header.h */,
+				4C2EAED91D584D870059072A /* viewController.swift */,
+				4CE7E6F11D6D5D5C009CD2C3 /* hangoutsViewController.swift */,
+				4C5E32221D78F6A10079CFB7 /* AddHangoutViewController.swift */,
+				4C35E7CF1D7CE34300943286 /* hangoutSpecificViewController.swift */,
+				4CE7E6F91D78DBB0009CD2C3 /* StreamViewController.swift */,
+				4CE7E6F71D6E2C9B009CD2C3 /* CustomHangoutCell.swift */,
+				4CE7E6EB1D62E91E009CD2C3 /* LoginViewController.swift */,
+				4CE7E6DE1D629C43009CD2C3 /* MenuController.swift */,
+				4C2EAF051D5AAB7B0059072A /* GarageContentViewController.swift */,
+				4C2EAF071D5AB3150059072A /* GarageModelProtocol.swift */,
+				4C2EAF091D5AB3B10059072A /* GarageModelObj.swift */,
+				4CE7E6F31D6E0B7A009CD2C3 /* HangoutsModelProtocol.swift */,
+				4CE7E6F51D6E0DC0009CD2C3 /* HangoutModelObj.swift */,
+				4C759D0E1D83C0F6006B95E1 /* SpecificHangoutModelProtocol.swift */,
 				4C2EAEDE1D584D870059072A /* Assets.xcassets */,
 				4C2EAEE01D584D870059072A /* LaunchScreen.storyboard */,
 				4C2EAEE31D584D870059072A /* Info.plist */,
@@ -123,6 +261,40 @@
 				4C2EAEF91D584D870059072A /* Info.plist */,
 			);
 			path = TeamGraysonGoUITests;
+			sourceTree = "<group>";
+		};
+		4CE7E6D91D61237C009CD2C3 /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				4CE7E6DB1D6123E7009CD2C3 /* SWRevealViewController.h */,
+				4CE7E6DC1D6123E7009CD2C3 /* SWRevealViewController.m */,
+			);
+			name = SWRevealViewController;
+			sourceTree = "<group>";
+		};
+		4CE7E6E01D62CF8D009CD2C3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C759D321D84DE11006B95E1 /* GoogleMaps.framework */,
+				4C759D331D84DE11006B95E1 /* GoogleMapsCore.framework */,
+				4C759D301D84DDD9006B95E1 /* GooglePlacePicker.framework */,
+				4C759D121D84D574006B95E1 /* GoogleMapsBase.framework */,
+				4C759D101D84D548006B95E1 /* GooglePlaces.framework */,
+				4CE7E6E91D62E7BF009CD2C3 /* FBSDKLoginKit.framework */,
+				4CE7E6E71D62E7B2009CD2C3 /* Bolts.framework */,
+				4CE7E6E51D62D1C3009CD2C3 /* FBSDKCoreKit.framework */,
+				4CE7E6E31D62D012009CD2C3 /* FBSDKShareKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4CE7E6ED1D652917009CD2C3 /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				4CE7E6EE1D652949009CD2C3 /* Reachability.h */,
+				4CE7E6EF1D652949009CD2C3 /* Reachability.m */,
+			);
+			name = Reachability;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,13 +365,17 @@
 				TargetAttributes = {
 					4C2EAED31D584D870059072A = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = EGKF8KSN42;
+						LastSwiftMigration = 0800;
 					};
 					4C2EAEE71D584D870059072A = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 4C2EAED31D584D870059072A;
 					};
 					4C2EAEF21D584D870059072A = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 4C2EAED31D584D870059072A;
 					};
 				};
@@ -229,9 +405,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C759D391D84DE82006B95E1 /* GooglePlacePicker.bundle in Resources */,
+				4C759D151D84D5E5006B95E1 /* GooglePlaces.bundle in Resources */,
 				4C2EAEE21D584D870059072A /* LaunchScreen.storyboard in Resources */,
 				4C2EAEDF1D584D870059072A /* Assets.xcassets in Resources */,
 				4C2EAEDD1D584D870059072A /* Main.storyboard in Resources */,
+				4C759D371D84DE44006B95E1 /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,8 +435,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4C2EAEDA1D584D870059072A /* ViewController.swift in Sources */,
+				4CE7E6F81D6E2C9B009CD2C3 /* CustomHangoutCell.swift in Sources */,
+				4C35E7D01D7CE34300943286 /* hangoutSpecificViewController.swift in Sources */,
+				4C2EAF0A1D5AB3B10059072A /* GarageModelObj.swift in Sources */,
+				4CE7E6DF1D629C43009CD2C3 /* MenuController.swift in Sources */,
+				4C2EAEDA1D584D870059072A /* viewController.swift in Sources */,
 				4C2EAED81D584D870059072A /* AppDelegate.swift in Sources */,
+				4CE7E6EC1D62E91E009CD2C3 /* LoginViewController.swift in Sources */,
+				4CE7E6FA1D78DBB0009CD2C3 /* StreamViewController.swift in Sources */,
+				4C759D0F1D83C0F6006B95E1 /* SpecificHangoutModelProtocol.swift in Sources */,
+				4C5E32231D78F6A10079CFB7 /* AddHangoutViewController.swift in Sources */,
+				4CE7E6F21D6D5D5C009CD2C3 /* hangoutsViewController.swift in Sources */,
+				4CE7E6F61D6E0DC0009CD2C3 /* HangoutModelObj.swift in Sources */,
+				4C2EAF081D5AB3150059072A /* GarageModelProtocol.swift in Sources */,
+				4CE7E6F41D6E0B7A009CD2C3 /* HangoutsModelProtocol.swift in Sources */,
+				4C2EAF061D5AAB7B0059072A /* GarageContentViewController.swift in Sources */,
+				4CE7E6F01D652949009CD2C3 /* Reachability.m in Sources */,
+				4CE7E6DD1D6123E7009CD2C3 /* SWRevealViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +546,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -390,6 +585,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -399,10 +595,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TeamGraysonGo",
+					"/Users/grahamturbyne/Documents/FacebookSDKs-iOS-4",
+				);
 				INFOPLIST_FILE = TeamGraysonGo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TeamGraysonGo/TeamGraysonGo-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -410,10 +619,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TeamGraysonGo",
+					"/Users/grahamturbyne/Documents/FacebookSDKs-iOS-4",
+				);
 				INFOPLIST_FILE = TeamGraysonGo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TeamGraysonGo/TeamGraysonGo-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -425,6 +646,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TeamGraysonGo.app/TeamGraysonGo";
 			};
 			name = Debug;
@@ -437,6 +659,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TeamGraysonGo.app/TeamGraysonGo";
 			};
 			name = Release;
@@ -448,6 +671,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = TeamGraysonGo;
 			};
 			name = Debug;
@@ -459,6 +683,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = TeamGraysonGo;
 			};
 			name = Release;
@@ -482,6 +707,7 @@
 				4C2EAEFE1D584D870059072A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4C2EAEFF1D584D870059072A /* Build configuration list for PBXNativeTarget "TeamGraysonGoTests" */ = {
 			isa = XCConfigurationList;
@@ -490,6 +716,7 @@
 				4C2EAF011D584D870059072A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4C2EAF021D584D870059072A /* Build configuration list for PBXNativeTarget "TeamGraysonGoUITests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +725,7 @@
 				4C2EAF041D584D870059072A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
