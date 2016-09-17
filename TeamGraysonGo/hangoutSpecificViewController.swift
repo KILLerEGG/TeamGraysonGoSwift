@@ -42,10 +42,10 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
     var notGoingList: [String]?
     var userGoingTag: Int?
     var userNotGoingTag: Int?
-    var going_xPos: CGFloat = 20
+    var going_xPos: CGFloat = 19
     var user_going_xPos: CGFloat?
     var user_notGoing_xPos: CGFloat?
-    var notGoing_xPos: CGFloat = 192
+    var notGoing_xPos: CGFloat = 197
     var yPos: CGFloat = 441
     
     var userGoingImage: UIImageView?
@@ -120,25 +120,117 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
 
     
     func stringFromTimeInterval(interval: NSTimeInterval) -> String {
-        let interval = Int(interval)
-        let minutes = (interval / 60) % 60
-        let hours = (interval / 3600)
-        if hours > 0 {
-            if minutes == 0 {
-                return String(format: "%d hr", hours)
+        let intInterval = Int(interval)
+        let days = (intInterval / 86400)
+        var hours = (intInterval / 3600)
+        let minutes = Int(interval / 60) % 60
+        
+        if days > 0 && days < 2 {
+            hours = hours - (24 * days)
+            if hours > 0 && hours < 2{
+                if minutes == 0 {
+                    return String(format: "%d day, %d hour", days, hours)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d day, %d hour, %d minute", days, hours, minutes)
+                }
+                else {
+                    return String(format: "%d day, %d hour, %d minutes", days, hours, minutes)
+                }
+            }
+            else if hours >= 2 {
+                if minutes == 0 {
+                    return String(format: "%d day, %d hours", days, hours)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d day, %d hours, %d minute", days, hours, minutes)
+                }
+                else {
+                    return String(format: "%d day, %d hours, %d minutes", days, hours, minutes)
+                }
             }
             else {
-                return String(format: "%d hr, %d min", hours, minutes)
+                if minutes == 0 {
+                    return String(format: "%d day", days)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d day, %d minute", days, minutes)
+                }
+                else {
+                    return String(format: "%d day, %d minutes", days, minutes)
+                }
+            }
+        }
+        else if days >= 2 {
+            hours = hours - (24 * days)
+            if hours > 0 && hours < 2{
+                if minutes == 0 {
+                    return String(format: "%d days, %d hour", days, hours)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d days, %d hour, %d minute", days, hours, minutes)
+                }
+                else {
+                    return String(format: "%d days, %d hour, %d minutes", days, hours, minutes)
+                }
+            }
+            else if hours >= 2 {
+                if minutes == 0 {
+                    return String(format: "%d days, %d hours", days, hours)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d days, %d hours, %d minute", days, hours, minutes)
+                }
+                else {
+                    return String(format: "%d days, %d hours, %d minutes", days, hours, minutes)
+                }
+            }
+            else {
+                if minutes == 0 {
+                    return String(format: "%d days", days)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d days, %d minute", days, minutes)
+                }
+                else {
+                    return String(format: "%d days, %d minutes", days, minutes)
+                }
             }
         }
         else {
-            if minutes > 0 {
-                return String(format: "%d min", minutes)
+            if hours > 0 && hours < 2{
+                if minutes == 0 {
+                    return String(format: "%d hour", hours)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d hour, %d minute", hours, minutes)
+                }
+                else {
+                    return String(format: "%d hour, %d minutes", hours, minutes)
+                }
             }
-            else if minutes == 0 {
-                return "now"
+            else if hours >= 2 {
+                if minutes == 0 {
+                    return String(format: "%d hours", hours)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d hours, %d minute", hours, minutes)
+                }
+                else {
+                    return String(format: "%d hours, %d minutes", hours, minutes)
+                }
             }
-            return String(format: "%d hr, %d min", hours, minutes)
+            else {
+                if minutes == 0 {
+                    return "Now"
+                }
+                else if minutes == 1 {
+                    return String(format: "%d minute", minutes)
+                }
+                else {
+                    return String(format: "%d minutes", minutes)
+                }
+            }
         }
     }
     
@@ -200,14 +292,20 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
             self.notGoingBackgroundImage.layer.borderWidth = 1
             self.notGoingBackgroundImage.layer.cornerRadius = 5
             
-            self.organizerTitleLabel.text = "\(self.first_name) is hanging out at:"
+            self.organizer = hangoutItems[0].organizer
+
+            if self.organizer! == self.first_name {
+                self.organizerTitleLabel.text = "You are hosting a hangout:"
+            }
+            else {
+                self.organizerTitleLabel.text = "\(self.organizer!) invited you to a hangout:"
+            }
             self.organizerTitleLabel.hidden = false
             self.locationLabel.hidden = false
             self.whenLabel.hidden = false
             
             self.locationLabel.text = hangoutItems[0].location
             self.whenLabel.text = self.stringFromTimeInterval(hangoutItems[0].date!)
-            self.organizer = hangoutItems[0].organizer
             self.goingList = hangoutItems[0].going
             self.notGoingList = hangoutItems[0].notGoing
             

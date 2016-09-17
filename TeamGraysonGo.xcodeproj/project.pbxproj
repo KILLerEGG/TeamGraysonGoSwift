@@ -18,6 +18,7 @@
 		4C2EAF081D5AB3150059072A /* GarageModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EAF071D5AB3150059072A /* GarageModelProtocol.swift */; };
 		4C2EAF0A1D5AB3B10059072A /* GarageModelObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EAF091D5AB3B10059072A /* GarageModelObj.swift */; };
 		4C35E7D01D7CE34300943286 /* hangoutSpecificViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C35E7CF1D7CE34300943286 /* hangoutSpecificViewController.swift */; };
+		4C434D611D8CA6A300719DDF /* CustomAVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C434D601D8CA6A300719DDF /* CustomAVPlayerViewController.swift */; };
 		4C5E32231D78F6A10079CFB7 /* AddHangoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E32221D78F6A10079CFB7 /* AddHangoutViewController.swift */; };
 		4C759D0F1D83C0F6006B95E1 /* SpecificHangoutModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C759D0E1D83C0F6006B95E1 /* SpecificHangoutModelProtocol.swift */; };
 		4C759D111D84D548006B95E1 /* GooglePlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D101D84D548006B95E1 /* GooglePlaces.framework */; };
@@ -91,6 +92,7 @@
 		4C2EAF071D5AB3150059072A /* GarageModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageModelProtocol.swift; sourceTree = "<group>"; };
 		4C2EAF091D5AB3B10059072A /* GarageModelObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageModelObj.swift; sourceTree = "<group>"; };
 		4C35E7CF1D7CE34300943286 /* hangoutSpecificViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hangoutSpecificViewController.swift; sourceTree = "<group>"; };
+		4C434D601D8CA6A300719DDF /* CustomAVPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAVPlayerViewController.swift; sourceTree = "<group>"; };
 		4C5E32221D78F6A10079CFB7 /* AddHangoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddHangoutViewController.swift; sourceTree = "<group>"; };
 		4C759D0E1D83C0F6006B95E1 /* SpecificHangoutModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecificHangoutModelProtocol.swift; sourceTree = "<group>"; };
 		4C759D101D84D548006B95E1 /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlaces.framework; sourceTree = "<group>"; };
@@ -241,6 +243,7 @@
 				4C2EAEDE1D584D870059072A /* Assets.xcassets */,
 				4C2EAEE01D584D870059072A /* LaunchScreen.storyboard */,
 				4C2EAEE31D584D870059072A /* Info.plist */,
+				4C434D601D8CA6A300719DDF /* CustomAVPlayerViewController.swift */,
 			);
 			path = TeamGraysonGo;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CE7E6F81D6E2C9B009CD2C3 /* CustomHangoutCell.swift in Sources */,
+				4C434D611D8CA6A300719DDF /* CustomAVPlayerViewController.swift in Sources */,
 				4C35E7D01D7CE34300943286 /* hangoutSpecificViewController.swift in Sources */,
 				4C2EAF0A1D5AB3B10059072A /* GarageModelObj.swift in Sources */,
 				4CE7E6DF1D629C43009CD2C3 /* MenuController.swift in Sources */,
@@ -543,7 +547,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "-ObjC";
@@ -583,7 +587,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
@@ -604,6 +608,7 @@
 					"/Users/grahamturbyne/Documents/FacebookSDKs-iOS-4",
 				);
 				INFOPLIST_FILE = TeamGraysonGo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGo;
@@ -628,6 +633,7 @@
 					"/Users/grahamturbyne/Documents/FacebookSDKs-iOS-4",
 				);
 				INFOPLIST_FILE = TeamGraysonGo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGo;
@@ -643,6 +649,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = TeamGraysonGoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -656,6 +663,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = TeamGraysonGoTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -668,6 +676,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = TeamGraysonGoUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -680,6 +689,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				INFOPLIST_FILE = TeamGraysonGoUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

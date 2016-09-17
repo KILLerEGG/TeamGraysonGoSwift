@@ -79,11 +79,13 @@ class StreamViewController: UIViewController, NSURLSessionDataDelegate {
     }
     
     func startStream(){
-        self.streamButton.hidden = false
+        self.streamButton.enabled = true
+        self.streamButton.layer.borderColor = UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0).CGColor
         self.activityIndicator.stopAnimating()
         let videoURL = NSURL(string: self.urlPath)
         let player = AVPlayer(URL: videoURL!)
         let playerViewController = AVPlayerViewController()
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(self.onVideoDone(_:)), name: AVPlayerItemPlaybackStalledNotification, object: player.currentItem)
         playerViewController.player = player
         self.presentViewController(playerViewController, animated: true) {
             playerViewController.player!.play()
@@ -99,12 +101,12 @@ class StreamViewController: UIViewController, NSURLSessionDataDelegate {
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
         self.streamButton.layer.borderWidth = 1
-        self.streamButton.layer.borderColor = UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0).CGColor
+        self.streamButton.layer.borderColor = UIColor.lightGrayColor().CGColor
         self.streamButton.layer.cornerRadius = 5
-        self.streamButton.hidden = true
-        self.checkStream() //JUST FOR TESTING NIGHT! UNCOMMENT BELOW FOR NON-ADMIN BUILD
+        self.streamButton.enabled = false
+        //self.checkStream() //JUST FOR TESTING NIGHT! UNCOMMENT BELOW FOR NON-ADMIN BUILD
         
-        /*let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         let now: NSDate = NSDate()
         let morningDateTime = calendar.dateBySettingHour(8, minute: 0, second: 0, ofDate: now, options: NSCalendarOptions.MatchFirst)!
         let eveningDateTime = calendar.dateBySettingHour(21, minute: 0, second: 0, ofDate: now, options: NSCalendarOptions.MatchFirst)!
@@ -118,7 +120,7 @@ class StreamViewController: UIViewController, NSURLSessionDataDelegate {
             let alert = UIAlertController(title: "Stream Error", message: "Stream is offline until 8am. Please try again then.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
-        }*/
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -128,11 +130,13 @@ class StreamViewController: UIViewController, NSURLSessionDataDelegate {
     
     // MARK: - Navigation
     @IBAction func startStream(sender: UIButton) {
+        self.streamButton.enabled = false
+        self.streamButton.layer.borderColor = UIColor.lightGrayColor().CGColor
         self.activityIndicator.startAnimating()
         self.urlPath = "http://10.0.0.246/stream/server/stream.m3u8"
-        self.checkStream() //JUST FOR TESTING NIGHT! UNCOMMENT BELOW FOR NON-ADMIN BUILD
+        //self.checkStream() //JUST FOR TESTING NIGHT! UNCOMMENT BELOW FOR NON-ADMIN BUILD
         
-        /*let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         let now: NSDate = NSDate()
         let morningDateTime = calendar.dateBySettingHour(8, minute: 0, second: 0, ofDate: now, options: NSCalendarOptions.MatchFirst)!
         let eveningDateTime = calendar.dateBySettingHour(21, minute: 0, second: 0, ofDate: now, options: NSCalendarOptions.MatchFirst)!
@@ -145,6 +149,6 @@ class StreamViewController: UIViewController, NSURLSessionDataDelegate {
             let alert = UIAlertController(title: "Stream Error", message: "Stream is offline until 8am. Please try again then.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
-        }*/
+        }
     }
 }

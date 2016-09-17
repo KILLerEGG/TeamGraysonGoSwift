@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import CoreLocation
+import GoogleMaps
 import GooglePlaces
 import GooglePlacePicker
 
-class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
+class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSMapViewDelegate, CLLocationManagerDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var locationTextField: UITextField!
@@ -19,6 +21,9 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, CLLo
     @IBOutlet weak var whenLabel: UILabel!
     @IBOutlet weak var whenDatePicker: UIDatePicker!
     
+    
+    @IBOutlet weak var manualLabel: UILabel!
+    @IBOutlet weak var placeMap: GMSMapView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     var canOpenPlacePicker: Bool = true
@@ -28,6 +33,7 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, CLLo
     @IBOutlet weak var addHangoutBtn: UIButton!
     
     var urlPath: String = "http://10.0.0.246/post_hangout.php"
+    var getLocationsUrlPath: String = "http://10.0.0.246/get_prev_hangout_locations.php"
     var first_name: String = ""
     let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, first_name, last_name"])
     
@@ -40,6 +46,7 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, CLLo
         super.viewDidLoad()
         
         self.locationTextField.delegate = self
+        self.placeMap.hidden = true
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddHangoutViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -62,6 +69,13 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, CLLo
         })
 
         loadingIndicator.stopAnimating()
+        self.whenDatePicker.minimumDate = NSDate()
+        self.showPlacePicker.layer.borderColor = UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0).CGColor
+        self.showPlacePicker.layer.borderWidth = 1
+        self.showPlacePicker.layer.cornerRadius = 5
+        self.addHangoutBtn.layer.borderColor = UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0).CGColor
+        self.addHangoutBtn.layer.borderWidth = 1
+        self.addHangoutBtn.layer.cornerRadius = 5
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -71,6 +85,7 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, CLLo
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
+        self.locationManager.startUpdatingHeading()
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -91,33 +106,33 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, CLLo
     func checkHangout(){
         if Reachability.connectedToNetwork() == true {
             loadingIndicator.startAnimating()
+            manualLabel.hidden = true
             locationLabel.hidden = true
             locationTextField.hidden = true
             whenLabel.hidden = true
             whenDatePicker.hidden = true
             addHangoutBtn.hidden = true
             showPlacePicker.hidden = true
+            placeMap.hidden = true
             verifyUrl()
         }
     }
     
     func postHangout(){
         let minutes = Int((whenDatePicker.date.timeIntervalSinceNow)/60) + 1
-        if locationTextField.hasText() && minutes > 0{
-            let location: String = locationTextField.text!
-            let url: NSURL = NSURL(string: self.urlPath)!
-            let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
-            let bodyData = "organizer=\(self.first_name)&location=\(location)&address=\(self.address)&minutes=\(String(minutes))"
-            request.HTTPMethod = "POST"
-            request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
-            
-            NSURLConnection.sendAsynchronousRequest(request as NSURLRequest, queue: NSOperationQueue.mainQueue())
-            {(response, data, error) in
-                if let HTTPResponse = response as? NSHTTPURLResponse {
-                    let statusCode = HTTPResponse.statusCode
-                    if statusCode == 200 {
-                        self.performSegueWithIdentifier("returnToHangouts", sender: self)
-                    }
+        let location: String = locationTextField.text!
+        let url: NSURL = NSURL(string: self.urlPath)!
+        let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
+        let bodyData = "organizer=\(self.first_name)&location=\(location)&address=\(self.address)&minutes=\(String(minutes))"
+        request.HTTPMethod = "POST"
+        request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        NSURLConnection.sendAsynchronousRequest(request as NSURLRequest, queue: NSOperationQueue.mainQueue())
+        {(response, data, error) in
+            if let HTTPResponse = response as? NSHTTPURLResponse {
+                let statusCode = HTTPResponse.statusCode
+                if statusCode == 200 {
+                    self.performSegueWithIdentifier("returnToHangouts", sender: self)
                 }
             }
         }
@@ -205,10 +220,24 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, CLLo
                 }
 
                 if let place = place {
-                    let coordinates = CLLocationCoordinate2DMake(place.coordinate.latitude, place.coordinate.longitude)
+                    //let coordinates = CLLocationCoordinate2DMake(place.coordinate.latitude, place.coordinate.longitude)
                     self.locationTextField.text = place.name
                     self.address = place.formattedAddress!
-                    //store address here as well
+                    self.placeMap.delegate = self
+                    self.placeMap.myLocationEnabled = true
+                    
+                    let camera = GMSCameraPosition.cameraWithLatitude(place.coordinate.latitude,
+                        longitude:place.coordinate.longitude, zoom:15)
+                    
+                    let marker = GMSMarker()
+                    marker.position = camera.target
+                    marker.snippet = "\(place.name)\n\(place.formattedAddress!)"
+                    marker.appearAnimation = kGMSMarkerAnimationPop
+                    marker.map = self.placeMap
+                    
+                    self.placeMap.hidden = false
+                    self.placeMap.animateToCameraPosition(camera)
+                    
                 } else {
                     print("No place was selected")
                 }
@@ -222,6 +251,19 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, CLLo
     }
     
     @IBAction func addHangoutButton(sender: UIButton) {
-        self.checkHangout()
+        let minutes = Int((whenDatePicker.date.timeIntervalSinceNow)/60) + 1
+        if locationTextField.hasText() && minutes > 0 {
+            self.checkHangout()
+        }
+        else if minutes == 0 {
+            let alert = UIAlertController(title: "Input Error", message: "Invalid time. Hangouts are meant to be in the future, not at this very moment! Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+        else {
+            let alert = UIAlertController(title: "Input Error", message: "Location field can't be empty. You have to have a hangout somewhere! Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
     }
 }

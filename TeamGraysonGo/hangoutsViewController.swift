@@ -70,6 +70,7 @@ class hangoutsViewController: UIViewController, UITableViewDataSource, UITableVi
             else
             {
                 self.first_name = result.valueForKey("first_name") as! String
+                self.reloadData()
             }
         })
     }
@@ -80,7 +81,7 @@ class hangoutsViewController: UIViewController, UITableViewDataSource, UITableVi
         if !self.loadingIcon.isAnimating() {
             self.loadingIcon.startAnimating()
         }
-        self.reloadData()
+        //self.reloadData()
     }
     
     func itemsDownloaded(items: NSArray){
@@ -103,25 +104,118 @@ class hangoutsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func stringFromTimeInterval(interval: NSTimeInterval) -> String {
-        let interval = Int(interval)
-        let minutes = (interval / 60) % 60
-        let hours = (interval / 3600)
-        if hours > 0 {
-            if minutes == 0 {
-                return String(format: "%d hr", hours)
+
+        let intInterval = Int(interval)
+        let days = (intInterval / 86400)
+        var hours = (intInterval / 3600)
+        let minutes = Int(interval / 60) % 60
+        
+        if days > 0 && days < 2 {
+            hours = hours - (24 * days)
+            if hours > 0 && hours < 2{
+                if minutes == 0 {
+                    return String(format: "%d day, %d hr", days, hours)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d day, %d hr, %d min", days, hours, minutes)
+                }
+                else {
+                    return String(format: "%d day, %d hr, %d mins", days, hours, minutes)
+                }
+            }
+            else if hours >= 2 {
+                if minutes == 0 {
+                    return String(format: "%d day, %d hrs", days, hours)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d day, %d hrs, %d min", days, hours, minutes)
+                }
+                else {
+                    return String(format: "%d day, %d hrs, %d mins", days, hours, minutes)
+                }
             }
             else {
-                return String(format: "%d hr, %d min", hours, minutes)
+                if minutes == 0 {
+                    return String(format: "%d day", days)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d day, %d min", days, minutes)
+                }
+                else {
+                    return String(format: "%d day, %d mins", days, minutes)
+                }
+            }
+        }
+        else if days >= 2 {
+            hours = hours - (24 * days)
+            if hours > 0 && hours < 2{
+                if minutes == 0 {
+                    return String(format: "%d days, %d hr", days, hours)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d days, %d hr, %d min", days, hours, minutes)
+                }
+                else {
+                    return String(format: "%d days, %d hr, %d mins", days, hours, minutes)
+                }
+            }
+            else if hours >= 2 {
+                if minutes == 0 {
+                    return String(format: "%d days, %d hrs", days, hours)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d days, %d hrs, %d min", days, hours, minutes)
+                }
+                else {
+                    return String(format: "%d days, %d hrs, %d mins", days, hours, minutes)
+                }
+            }
+            else {
+                if minutes == 0 {
+                    return String(format: "%d days", days)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d days, %d min", days, minutes)
+                }
+                else {
+                    return String(format: "%d days, %d mins", days, minutes)
+                }
             }
         }
         else {
-            if minutes > 0 {
-                return String(format: "%d min", minutes)
+            if hours > 0 && hours < 2{
+                if minutes == 0 {
+                    return String(format: "%d hr", hours)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d hr, %d min", hours, minutes)
+                }
+                else {
+                    return String(format: "%d hr, %d mins", hours, minutes)
+                }
             }
-            else if minutes == 0 {
-                return "now"
+            else if hours >= 2 {
+                if minutes == 0 {
+                    return String(format: "%d hrs", hours)
+                }
+                else if minutes == 1 {
+                    return String(format: "%d hrs, %d min", hours, minutes)
+                }
+                else {
+                    return String(format: "%d hrs, %d mins", hours, minutes)
+                }
             }
-            return String(format: "%d hr, %d min", hours, minutes)
+            else {
+                if minutes == 0 {
+                    return "Now"
+                }
+                else if minutes == 1 {
+                    return String(format: "%d min", minutes)
+                }
+                else {
+                    return String(format: "%d mins", minutes)
+                }
+            }
         }
     }
 
@@ -142,7 +236,14 @@ class hangoutsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(hangoutTableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: CustomHangoutCell = hangoutTableView.dequeueReusableCellWithIdentifier("hangoutCell")! as! CustomHangoutCell
-        cell.organizerLabel.text = hangoutItems[(indexPath as NSIndexPath).item].organizer! + " is going to " + hangoutItems[(indexPath as NSIndexPath).item].location! + "!"
+        print(hangoutItems[(indexPath as NSIndexPath).item].organizer)
+        print(self.first_name)
+        if (hangoutItems[(indexPath as NSIndexPath).item].organizer)! == self.first_name {
+            cell.organizerLabel.text = "You are going to " + hangoutItems[(indexPath as NSIndexPath).item].location! + "!"
+        }
+        else {
+            cell.organizerLabel.text = hangoutItems[(indexPath as NSIndexPath).item].organizer! + " is going to " + hangoutItems[(indexPath as NSIndexPath).item].location! + "!"
+        }
         cell.whenLabel.text = stringFromTimeInterval(hangoutItems[(indexPath as NSIndexPath).item].date!)
         for i in 0...(globalPicsArray.count-1) {
             if globalPicsArray[i].name == hangoutItems[(indexPath as NSIndexPath).item].organizer {
