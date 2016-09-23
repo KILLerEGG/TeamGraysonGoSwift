@@ -276,6 +276,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
     
     @IBAction func doneEditing(sender: UIButton) {
         let minutes = Int((datePicker.date.timeIntervalSinceNow)/60) + 1
+        
         if locationTextField.hasText() && minutes > 0 {
             self.prepareForEdit()
         }
