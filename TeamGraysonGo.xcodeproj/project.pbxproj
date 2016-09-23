@@ -18,7 +18,6 @@
 		4C2EAF081D5AB3150059072A /* GarageModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EAF071D5AB3150059072A /* GarageModelProtocol.swift */; };
 		4C2EAF0A1D5AB3B10059072A /* GarageModelObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2EAF091D5AB3B10059072A /* GarageModelObj.swift */; };
 		4C35E7D01D7CE34300943286 /* hangoutSpecificViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C35E7CF1D7CE34300943286 /* hangoutSpecificViewController.swift */; };
-		4C434D611D8CA6A300719DDF /* CustomAVPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C434D601D8CA6A300719DDF /* CustomAVPlayerViewController.swift */; };
 		4C5E32231D78F6A10079CFB7 /* AddHangoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C5E32221D78F6A10079CFB7 /* AddHangoutViewController.swift */; };
 		4C759D0F1D83C0F6006B95E1 /* SpecificHangoutModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C759D0E1D83C0F6006B95E1 /* SpecificHangoutModelProtocol.swift */; };
 		4C759D111D84D548006B95E1 /* GooglePlaces.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D101D84D548006B95E1 /* GooglePlaces.framework */; };
@@ -55,6 +54,7 @@
 		4CE7E6F61D6E0DC0009CD2C3 /* HangoutModelObj.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6F51D6E0DC0009CD2C3 /* HangoutModelObj.swift */; };
 		4CE7E6F81D6E2C9B009CD2C3 /* CustomHangoutCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6F71D6E2C9B009CD2C3 /* CustomHangoutCell.swift */; };
 		4CE7E6FA1D78DBB0009CD2C3 /* StreamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6F91D78DBB0009CD2C3 /* StreamViewController.swift */; };
+		4CEE04DE1D9073890025ACB6 /* EditHangoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE04DD1D9073890025ACB6 /* EditHangoutViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,7 +92,6 @@
 		4C2EAF071D5AB3150059072A /* GarageModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageModelProtocol.swift; sourceTree = "<group>"; };
 		4C2EAF091D5AB3B10059072A /* GarageModelObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GarageModelObj.swift; sourceTree = "<group>"; };
 		4C35E7CF1D7CE34300943286 /* hangoutSpecificViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = hangoutSpecificViewController.swift; sourceTree = "<group>"; };
-		4C434D601D8CA6A300719DDF /* CustomAVPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAVPlayerViewController.swift; sourceTree = "<group>"; };
 		4C5E32221D78F6A10079CFB7 /* AddHangoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddHangoutViewController.swift; sourceTree = "<group>"; };
 		4C759D0E1D83C0F6006B95E1 /* SpecificHangoutModelProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecificHangoutModelProtocol.swift; sourceTree = "<group>"; };
 		4C759D101D84D548006B95E1 /* GooglePlaces.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlaces.framework; sourceTree = "<group>"; };
@@ -132,6 +131,7 @@
 		4CE7E6F51D6E0DC0009CD2C3 /* HangoutModelObj.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HangoutModelObj.swift; sourceTree = "<group>"; };
 		4CE7E6F71D6E2C9B009CD2C3 /* CustomHangoutCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomHangoutCell.swift; sourceTree = "<group>"; };
 		4CE7E6F91D78DBB0009CD2C3 /* StreamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamViewController.swift; sourceTree = "<group>"; };
+		4CEE04DD1D9073890025ACB6 /* EditHangoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditHangoutViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +230,7 @@
 				4CE7E6F11D6D5D5C009CD2C3 /* hangoutsViewController.swift */,
 				4C5E32221D78F6A10079CFB7 /* AddHangoutViewController.swift */,
 				4C35E7CF1D7CE34300943286 /* hangoutSpecificViewController.swift */,
+				4CEE04DD1D9073890025ACB6 /* EditHangoutViewController.swift */,
 				4CE7E6F91D78DBB0009CD2C3 /* StreamViewController.swift */,
 				4CE7E6F71D6E2C9B009CD2C3 /* CustomHangoutCell.swift */,
 				4CE7E6EB1D62E91E009CD2C3 /* LoginViewController.swift */,
@@ -243,7 +244,6 @@
 				4C2EAEDE1D584D870059072A /* Assets.xcassets */,
 				4C2EAEE01D584D870059072A /* LaunchScreen.storyboard */,
 				4C2EAEE31D584D870059072A /* Info.plist */,
-				4C434D601D8CA6A300719DDF /* CustomAVPlayerViewController.swift */,
 			);
 			path = TeamGraysonGo;
 			sourceTree = "<group>";
@@ -439,11 +439,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CE7E6F81D6E2C9B009CD2C3 /* CustomHangoutCell.swift in Sources */,
-				4C434D611D8CA6A300719DDF /* CustomAVPlayerViewController.swift in Sources */,
 				4C35E7D01D7CE34300943286 /* hangoutSpecificViewController.swift in Sources */,
 				4C2EAF0A1D5AB3B10059072A /* GarageModelObj.swift in Sources */,
 				4CE7E6DF1D629C43009CD2C3 /* MenuController.swift in Sources */,
 				4C2EAEDA1D584D870059072A /* viewController.swift in Sources */,
+				4CEE04DE1D9073890025ACB6 /* EditHangoutViewController.swift in Sources */,
 				4C2EAED81D584D870059072A /* AppDelegate.swift in Sources */,
 				4CE7E6EC1D62E91E009CD2C3 /* LoginViewController.swift in Sources */,
 				4CE7E6FA1D78DBB0009CD2C3 /* StreamViewController.swift in Sources */,
@@ -553,6 +553,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -591,6 +592,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = 2.3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -616,7 +618,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TeamGraysonGo/TeamGraysonGo-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -640,7 +642,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "TeamGraysonGo/TeamGraysonGo-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -653,7 +655,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TeamGraysonGo.app/TeamGraysonGo";
 			};
 			name = Debug;
@@ -667,7 +669,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TeamGraysonGo.app/TeamGraysonGo";
 			};
 			name = Release;
@@ -680,7 +682,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = TeamGraysonGo;
 			};
 			name = Debug;
@@ -693,7 +695,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.grahamturbyne.TeamGraysonGoUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 2.3;
 				TEST_TARGET_NAME = TeamGraysonGo;
 			};
 			name = Release;

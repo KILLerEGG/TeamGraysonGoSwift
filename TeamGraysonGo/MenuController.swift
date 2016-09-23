@@ -8,13 +8,15 @@
 
 import UIKit
 
-class MenuController: UITableViewController {
+class MenuController: UITableViewController, FBSDKLoginButtonDelegate {
     @IBOutlet weak var usernameWelcomeLabel: UILabel!
+    @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
     
     let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, first_name, last_name"])
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.fbLoginButton.delegate = self
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
             if ((error) != nil)
@@ -33,10 +35,29 @@ class MenuController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!){
+        
+        if Reachability.connectedToNetwork() == true {
+            
+            if ((error) != nil){
+                // Process error
+                let alert = UIAlertController(title: "Facebook Login Error", message: "There was an error when trying to log you in. Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            else if result.isCancelled {
+                // Handle cancellations
+            }
+            else {
+                // Nothing to do right now, everything worked well
+            }
+        }
+    }
 
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         print("User Logged Out")
-        //performSegueWithIdentifier("logOut", sender: nil)
+        performSegueWithIdentifier("logOut", sender: nil)
     }
 
     

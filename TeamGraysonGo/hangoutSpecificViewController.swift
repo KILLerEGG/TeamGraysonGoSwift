@@ -54,6 +54,7 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
     var goingButton: UIButton?
     var notGoingButton: UIButton?
     var cancelButton: UIButton?
+    var editButton: UIButton?
     
     var userUIImage: UIImageView?
     
@@ -239,7 +240,6 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
             if error != nil {
                 print(error)
                 self.googleMap.hidden = true
-                return
             }
             if placemarks?.count > 0 {
                 
@@ -274,8 +274,11 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
             }
             
             if hangoutItems[0].address != "" {
-                forwardGeocoding(hangoutItems[0].address!, place: hangoutItems[0].location!)
+                forwardGeocoding((hangoutItems[0].address)!, place: (hangoutItems[0].location)!)
             }
+            /*else {
+                forwardGeocoding(hangoutItems[0].location!, place: hangoutItems[0].location!)
+            }*/
             
             self.loadingIndicator.stopAnimating()
             
@@ -432,6 +435,19 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
                 self.cancelButton!.addTarget(self, action: #selector(self.cancelAction), forControlEvents: UIControlEvents.TouchUpInside)
                 self.cancelButton!.addTarget(self, action: #selector(self.resetCancelButtonColor), forControlEvents: UIControlEvents.TouchUpOutside)
                 self.view.addSubview(self.cancelButton!)
+                
+                self.editButton = UIButton(frame: CGRect(x: 110, y: 580, width: 150, height: 50))
+                self.editButton!.layer.cornerRadius = 5
+                self.editButton!.layer.borderWidth = 1
+                self.editButton!.layer.borderColor = UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0).CGColor
+                self.editButton!.backgroundColor = UIColor.clearColor()
+                self.editButton!.setTitle("Edit Hangout", forState: .Normal)
+                self.editButton!.setTitleColor(UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0), forState: .Normal)
+                self.editButton!.setTitleColor(UIColor.whiteColor(), forState: .Highlighted)
+                self.editButton!.addTarget(self, action: #selector(self.changeEditButtonColor), forControlEvents: UIControlEvents.TouchDown)
+                self.editButton!.addTarget(self, action: #selector(self.editAction), forControlEvents: UIControlEvents.TouchUpInside)
+                self.editButton!.addTarget(self, action: #selector(self.resetEditButtonColor), forControlEvents: UIControlEvents.TouchUpOutside)
+                self.view.addSubview(self.editButton!)
             }
         }
     }
@@ -486,6 +502,20 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
         self.isCancelled = true
         self.cancel()
     }
+    
+    func changeEditButtonColor(sender: UIButton!) {
+        self.editButton!.backgroundColor = UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0)
+    }
+    
+    func resetEditButtonColor(sender: UIButton!) {
+        self.editButton!.backgroundColor = UIColor.clearColor()
+        self.editButton!.layer.borderColor = UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0).CGColor
+    }
+    
+    func editAction(sender: UIButton!) {
+        self.editButton!.backgroundColor = UIColor.clearColor()
+        self.performSegueWithIdentifier("editHangout", sender: self)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -528,6 +558,17 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
             self.cancelButton!.enabled = true
             self.cancelButton!.backgroundColor = UIColor.clearColor()
             self.cancelButton!.layer.borderColor = UIColor(red: 214/255, green: 57/255, blue: 57/255, alpha: 1.0).CGColor
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "editHangout" {
+            let nextScene =  segue.destinationViewController as! EditHangoutViewController
+            print("id: \(self.hangoutID!)")
+            nextScene.hangoutID = self.hangoutID!
+            nextScene.location = self.hangoutItems[0].location!
+            nextScene.address = self.hangoutItems[0].address!
+            nextScene.minutes = self.hangoutItems[0].date!
         }
     }
     

@@ -16,19 +16,16 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
 
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var locationTextField: UITextField!
-    
     @IBOutlet weak var showPlacePicker: UIButton!
     @IBOutlet weak var whenLabel: UILabel!
     @IBOutlet weak var whenDatePicker: UIDatePicker!
-    
-    
     @IBOutlet weak var manualLabel: UILabel!
     @IBOutlet weak var placeMap: GMSMapView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
     var canOpenPlacePicker: Bool = true
     var address: String = ""
-    
+    var locationMarker: GMSMarker?
    
     @IBOutlet weak var addHangoutBtn: UIButton!
     
@@ -229,11 +226,15 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
                     let camera = GMSCameraPosition.cameraWithLatitude(place.coordinate.latitude,
                         longitude:place.coordinate.longitude, zoom:15)
                     
+                    self.locationMarker?.map = nil
+                    
                     let marker = GMSMarker()
                     marker.position = camera.target
                     marker.snippet = "\(place.name)\n\(place.formattedAddress!)"
                     marker.appearAnimation = kGMSMarkerAnimationPop
                     marker.map = self.placeMap
+                    
+                    self.locationMarker = marker
                     
                     self.placeMap.hidden = false
                     self.placeMap.animateToCameraPosition(camera)

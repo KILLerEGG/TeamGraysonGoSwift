@@ -120,6 +120,9 @@ class StreamViewController: UIViewController, NSURLSessionDataDelegate {
             let alert = UIAlertController(title: "Stream Error", message: "Stream is offline until 8am. Please try again then.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
+            self.activityIndicator.stopAnimating()
+            self.streamButton.enabled = true
+            self.streamButton.layer.borderColor = UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0).CGColor
         }
     }
 
@@ -149,6 +152,9 @@ class StreamViewController: UIViewController, NSURLSessionDataDelegate {
             let alert = UIAlertController(title: "Stream Error", message: "Stream is offline until 8am. Please try again then.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
+            self.activityIndicator.stopAnimating()
+            self.streamButton.enabled = true
+            self.streamButton.layer.borderColor = UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0).CGColor
         }
     }
 }
