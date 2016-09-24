@@ -40,11 +40,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TeamGraysonGo/HangoutModelObj.swift"
-            timestampString = "496377977.433309"
+            timestampString = "496387180.540944"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "convertDate(seconds:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -56,11 +56,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TeamGraysonGo/hangoutsViewController.swift"
-            timestampString = "495760353.298232"
+            timestampString = "496387022.623075"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "314"
+            endingLineNumber = "314"
             landmarkName = "tableView(hangoutTableView:cellForRowAtIndexPath:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -77,8 +77,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "147"
             endingLineNumber = "147"
-            landmarkName = "startStream(_:)"
-            landmarkType = "5">
+            landmarkName = "startStream(sender:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -88,11 +88,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TeamGraysonGo/hangoutSpecificViewController.swift"
-            timestampString = "496131029.892669"
+            timestampString = "496401222.431712"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "600"
-            endingLineNumber = "600"
+            startingLineNumber = "621"
+            endingLineNumber = "621"
             landmarkName = "HangoutSpecificViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -120,12 +120,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TeamGraysonGo/hangoutSpecificViewController.swift"
-            timestampString = "496131029.892669"
+            timestampString = "496401222.431712"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
-            landmarkName = "itemsDownloaded(items:)"
+            startingLineNumber = "336"
+            endingLineNumber = "336"
+            landmarkName = "itemsDownloaded(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeamGraysonGo/LoginViewController.swift"
+            timestampString = "496397734.098876"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
+            landmarkName = "middlePointOfListMarkers(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "TeamGraysonGo/LoginViewController.swift"
+            timestampString = "496397753.63685"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "middlePointOfListMarkers(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

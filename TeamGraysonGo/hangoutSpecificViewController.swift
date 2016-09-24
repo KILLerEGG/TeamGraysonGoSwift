@@ -121,7 +121,11 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
 
     
     func stringFromTimeInterval(interval: NSTimeInterval) -> String {
-        let intInterval = Int(interval)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSLocale.currentLocale()
+        dateFormatter.dateFormat = "h:mm a, MMM d"
+        return dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: interval))
+        /*let intInterval = Int(interval)
         let days = (intInterval / 86400)
         var hours = (intInterval / 3600)
         let minutes = Int(interval / 60) % 60
@@ -232,7 +236,7 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
                     return String(format: "%d minutes", minutes)
                 }
             }
-        }
+        }*/
     }
     
     func forwardGeocoding(address: String, place: String) {
@@ -249,17 +253,34 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
                 self.latitude = coordinate!.latitude
                 self.longitude = coordinate!.longitude
                 
-                let camera = GMSCameraPosition.cameraWithLatitude(coordinate!.latitude,
-                    longitude:coordinate!.longitude, zoom:15)
-                
                 let marker = GMSMarker()
-                marker.position = camera.target
+                marker.position = CLLocationCoordinate2D(latitude: coordinate!.latitude, longitude: coordinate!.longitude)
                 marker.snippet = "\(place)\n\(address)"
                 marker.appearAnimation = kGMSMarkerAnimationPop
                 marker.map = self.googleMap
                 
+                //let camera = GMSCameraPosition.cameraWithTarget(pointCentralization.middlePointOfListMarkers([marker.position, (self.googleMap.myLocation?.coordinate)!]), zoom: 15)
+                
+                var bounds = GMSCoordinateBounds()
+                
+                bounds = bounds.includingCoordinate(marker.position)
+                bounds = bounds.includingCoordinate((self.googleMap?.myLocation?.coordinate)!)
+                
                 self.googleMap.hidden = false
-                self.googleMap.animateToCameraPosition(camera)
+                
+                self.googleMap.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds))
+                
+                //let camera = GMSCameraPosition.cameraWithLatitude(coordinate!.latitude,
+                    //longitude:coordinate!.longitude, zoom:15)
+                
+                /*let marker = GMSMarker()
+                marker.position = camera.target
+                marker.snippet = "\(place)\n\(address)"
+                marker.appearAnimation = kGMSMarkerAnimationPop
+                marker.map = self.googleMap*/
+                
+                //self.googleMap.hidden = false
+                //self.googleMap.animateToCameraPosition(camera)
             }
         })
     }
@@ -568,7 +589,7 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
             nextScene.hangoutID = self.hangoutID!
             nextScene.location = self.hangoutItems[0].location!
             nextScene.address = self.hangoutItems[0].address!
-            nextScene.minutes = self.hangoutItems[0].date!
+            nextScene.seconds = self.hangoutItems[0].date!
         }
     }
     

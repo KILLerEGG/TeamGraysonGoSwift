@@ -104,8 +104,12 @@ class hangoutsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
 
     func stringFromTimeInterval(interval: NSTimeInterval) -> String {
-
-        let intInterval = Int(interval)
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.locale = NSLocale.currentLocale()
+        dateFormatter.dateFormat = "h:mm a - MMM d"
+        print(interval)
+        return dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: interval))
+        /*let intInterval = Int(interval)
         let days = (intInterval / 86400)
         var hours = (intInterval / 3600)
         let minutes = Int(interval / 60) % 60
@@ -216,7 +220,7 @@ class hangoutsViewController: UIViewController, UITableViewDataSource, UITableVi
                     return String(format: "%d mins", minutes)
                 }
             }
-        }
+        }*/
     }
 
     override func didReceiveMemoryWarning() {

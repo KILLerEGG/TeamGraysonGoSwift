@@ -27,7 +27,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
     var hangoutID: String?
     var location: String?
     var address: String = ""
-    var minutes: NSTimeInterval?
+    var seconds: NSTimeInterval?
     var urlPath: String = "http://10.0.0.246/edit_hangout.php"
     var latitude: Double!
     var longitude: Double!
@@ -62,7 +62,8 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         self.editHangoutButton.layer.borderWidth = 1
         self.editHangoutButton.layer.cornerRadius = 5
         self.editHangoutButton.layer.borderColor = UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0).CGColor
-        self.datePicker.date = NSDate.init(timeIntervalSinceNow: minutes!)
+        self.datePicker.date = NSDate(timeIntervalSince1970: seconds!)
+        //self.datePicker.date = NSDate(timeIntervalSinceReferenceDate: seconds!)// NSDate.init(timeIntervalSinceNow: seconds!)
         self.datePicker.minimumDate = NSDate()
         
         if self.address != "" {
@@ -196,11 +197,12 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
                 self.address = "";
             }
         }
-        let minutes = Int((datePicker.date.timeIntervalSinceNow)/60) + 1
+        //let minutes = Int((datePicker.date.timeIntervalSinceNow)/60) + 1
+        let seconds = datePicker.date.timeIntervalSince1970
         let location: String = locationTextField.text!
         let url: NSURL = NSURL(string: self.urlPath)!
         let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
-        let bodyData = "id=\(self.hangoutID!)&location=\(location)&address=\(self.address)&minutes=\(String(minutes))"
+        let bodyData = "id=\(self.hangoutID!)&location=\(location)&address=\(self.address)&seconds=\(String(seconds))"
         request.HTTPMethod = "POST"
         request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
         
@@ -275,16 +277,16 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
     }
     
     @IBAction func doneEditing(sender: UIButton) {
-        let minutes = Int((datePicker.date.timeIntervalSinceNow)/60) + 1
+        //let minutes = Int((datePicker.date.timeIntervalSinceNow)/60) + 1
         
-        if locationTextField.hasText() && minutes > 0 {
+        if locationTextField.hasText() {//&& minutes > 0 {
             self.prepareForEdit()
         }
-        else if minutes == 0 {
+        /*else if minutes == 0 {
             let alert = UIAlertController(title: "Input Error", message: "Invalid time. Hangouts are meant to be in the future, not at this very moment! Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
-        }
+        }*/
         else {
             let alert = UIAlertController(title: "Input Error", message: "Location field can't be empty. You have to have a hangout somewhere! Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))

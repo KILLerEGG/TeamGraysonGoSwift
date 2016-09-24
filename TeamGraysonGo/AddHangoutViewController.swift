@@ -118,6 +118,7 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
     func postHangout(){
         //let minutes = Int((whenDatePicker.date.timeIntervalSinceNow)/60) + 1
         let seconds = whenDatePicker.date.timeIntervalSince1970
+        print("posting now: \(String(seconds))")
         let location: String = locationTextField.text!
         let url: NSURL = NSURL(string: self.urlPath)!
         let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)

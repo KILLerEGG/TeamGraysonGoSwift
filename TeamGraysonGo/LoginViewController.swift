@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 import Foundation
 import SystemConfiguration
 
@@ -41,6 +42,75 @@ public class Reachability {
         
         
         return (isReachable && !needsConnection)
+    }
+}
+
+public class pointCentralization {
+
+//        /** Degrees to Radian **/
+
+    class func degreeToRadian(angle:CLLocationDegrees) -> CGFloat{
+        
+        return (  (CGFloat(angle)) / 180.0 * CGFloat(M_PI)  )
+        
+    }
+
+    //        /** Radians to Degrees **/
+
+    class func radianToDegree(radian:CGFloat) -> CLLocationDegrees{
+        
+        return CLLocationDegrees(  radian * CGFloat(180.0 / M_PI)  )
+        
+    }
+
+    class func middlePointOfListMarkers(listCoords: [CLLocationCoordinate2D]) -> CLLocationCoordinate2D{
+        
+        var x = 0.0 as CGFloat
+        
+        var y = 0.0 as CGFloat
+        
+        var z = 0.0 as CGFloat
+        
+        
+        
+        for coordinate in listCoords{
+            
+            let lat:CGFloat = degreeToRadian(coordinate.latitude)
+            
+            let lon:CGFloat = degreeToRadian(coordinate.longitude)
+            
+            x = x + cos(lat) * cos(lon)
+            
+            y = y + cos(lat) * sin(lon);
+            
+            z = z + sin(lat);
+            
+        }
+        
+        x = x/CGFloat(listCoords.count)
+        
+        y = y/CGFloat(listCoords.count)
+        
+        z = z/CGFloat(listCoords.count)
+        
+        
+        
+        let resultLon: CGFloat = atan2(y, x)
+        
+        let resultHyp: CGFloat = sqrt(x*x+y*y)
+        
+        let resultLat:CGFloat = atan2(z, resultHyp)
+        
+        
+        
+        let newLat = radianToDegree(resultLat)
+        
+        let newLon = radianToDegree(resultLon)
+        
+        let result:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: newLat, longitude: newLon)
+        
+        return result
+        
     }
 }
 

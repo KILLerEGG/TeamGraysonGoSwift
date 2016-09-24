@@ -51,7 +51,8 @@ class HangoutModelObj: NSObject {
         }
         self.location = location
         self.address = address
-        self.date = convertDate(seconds)
+        self.date = seconds
+        //self.date = convertDate(seconds)
     }
 
     
@@ -61,8 +62,9 @@ class HangoutModelObj: NSObject {
         
         if seconds > 0{
             let date = NSDate(timeIntervalSince1970: seconds)
+            return date.timeIntervalSince1970
             //let date = date.dateByAddingTimeInterval(Double(minutes)*60.0)
-            return date.timeIntervalSinceNow
+            //return date.timeIntervalSinceNow
         }
         /*else if minutes == 0{
             return date.timeIntervalSinceNow
