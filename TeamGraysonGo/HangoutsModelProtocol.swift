@@ -85,7 +85,7 @@ class HangoutsModel: NSObject, NSURLSessionDataDelegate{
                         let seconds = jsonElement["seconds"] as? String
                     {
                         
-                        let item = HangoutModelObj(id: id, organizer: organizer, going: going, notGoing: notGoing, location: location, address: address, seconds: Double(seconds)!)
+                        let item = HangoutModelObj(id: id, organizer: organizer, going: going, notGoing: notGoing, location: location.stringByRemovingPercentEncoding!, address: address, seconds: Double(seconds)!)
                         
                         hangoutItems.addObject(item)
                         

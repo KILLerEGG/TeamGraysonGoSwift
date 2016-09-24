@@ -36,6 +36,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
     var locationManager: CLLocationManager!
     var placePicker: GMSPlacePicker!
     var originalAddress: String?
+    var originalDate: NSDate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +66,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         self.datePicker.date = NSDate(timeIntervalSince1970: seconds!)
         //self.datePicker.date = NSDate(timeIntervalSinceReferenceDate: seconds!)// NSDate.init(timeIntervalSinceNow: seconds!)
         self.datePicker.minimumDate = NSDate()
+        self.originalDate = self.datePicker.date
         
         if self.address != "" {
             self.originalAddress = self.address
@@ -199,7 +201,9 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         }
         //let minutes = Int((datePicker.date.timeIntervalSinceNow)/60) + 1
         let seconds = datePicker.date.timeIntervalSince1970
-        let location: String = locationTextField.text!
+        //let location: String = locationTextField.text!
+        let customAllowedSet =  NSCharacterSet(charactersInString:"!*'();:@&=+$,/?%#[]").invertedSet
+        let location: String = locationTextField.text!.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
         let url: NSURL = NSURL(string: self.urlPath)!
         let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
         let bodyData = "id=\(self.hangoutID!)&location=\(location)&address=\(self.address)&seconds=\(String(seconds))"
@@ -277,20 +281,33 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
     }
     
     @IBAction func doneEditing(sender: UIButton) {
-        //let minutes = Int((datePicker.date.timeIntervalSinceNow)/60) + 1
-        
-        if locationTextField.hasText() {//&& minutes > 0 {
-            self.prepareForEdit()
+        let seconds = datePicker.date
+        let now = NSDate()
+        let timeInFiveMin = now.dateByAddingTimeInterval(4*60)
+        if datePicker.date == self.originalDate {
+            if locationTextField.hasText() {
+                self.prepareForEdit()
+            }
+            else {
+                let alert = UIAlertController(title: "Input Error", message: "Location field can't be empty. You have to have a hangout somewhere! Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
         }
-        /*else if minutes == 0 {
-            let alert = UIAlertController(title: "Input Error", message: "Invalid time. Hangouts are meant to be in the future, not at this very moment! Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-        }*/
         else {
-            let alert = UIAlertController(title: "Input Error", message: "Location field can't be empty. You have to have a hangout somewhere! Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            if locationTextField.hasText() && ((timeInFiveMin.laterDate(seconds)) == seconds){
+                self.prepareForEdit()
+            }
+            else if (timeInFiveMin.laterDate(seconds)) == timeInFiveMin {
+                let alert = UIAlertController(title: "Input Error", message: "Invalid time. Hangouts are meant to be in the future, not at this very moment! Please enter a time at least 5 minutes in the future.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
+            else {
+                let alert = UIAlertController(title: "Input Error", message: "Location field can't be empty. You have to have a hangout somewhere! Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
         }
     }
 }

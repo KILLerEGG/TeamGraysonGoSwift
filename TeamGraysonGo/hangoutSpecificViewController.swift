@@ -60,6 +60,7 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
     
     var latitude: CLLocationDegrees = 0
     var longitude: CLLocationDegrees = 0
+    var canPlaceLocation = true
     
     var going = 0
     var notGoing = 0
@@ -103,7 +104,7 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
         })
     }
     
-    /*func locationManager(manager: CLLocationManager,
+    func locationManager(manager: CLLocationManager,
                          didFailWithError error: NSError){
         
         print("An error occurred while tracking location changes : \(error.description)")
@@ -113,11 +114,9 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
     func locationManager(manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]){
         
-        let location:CLLocation = locations.last!
-        self.userLat = location.coordinate.latitude
-        self.userLon = location.coordinate.longitude
+        //let location:CLLocation = locations.last!
         
-    }*/
+    }
 
     
     func stringFromTimeInterval(interval: NSTimeInterval) -> String {
@@ -259,28 +258,26 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
                 marker.appearAnimation = kGMSMarkerAnimationPop
                 marker.map = self.googleMap
                 
-                //let camera = GMSCameraPosition.cameraWithTarget(pointCentralization.middlePointOfListMarkers([marker.position, (self.googleMap.myLocation?.coordinate)!]), zoom: 15)
-                
-                var bounds = GMSCoordinateBounds()
-                
-                bounds = bounds.includingCoordinate(marker.position)
-                bounds = bounds.includingCoordinate((self.googleMap?.myLocation?.coordinate)!)
+                let camera = GMSCameraPosition.cameraWithLatitude(coordinate!.latitude,
+                    longitude:coordinate!.longitude, zoom:15)
                 
                 self.googleMap.hidden = false
+                self.googleMap.animateToCameraPosition(camera)
                 
-                self.googleMap.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds))
+                if self.canPlaceLocation {
+                    
+                    var bounds = GMSCoordinateBounds()
+                    
+                    bounds = bounds.includingCoordinate(marker.position)
+                    bounds = bounds.includingCoordinate((self.googleMap?.myLocation?.coordinate)!)
                 
-                //let camera = GMSCameraPosition.cameraWithLatitude(coordinate!.latitude,
-                    //longitude:coordinate!.longitude, zoom:15)
-                
-                /*let marker = GMSMarker()
-                marker.position = camera.target
-                marker.snippet = "\(place)\n\(address)"
-                marker.appearAnimation = kGMSMarkerAnimationPop
-                marker.map = self.googleMap*/
-                
-                //self.googleMap.hidden = false
-                //self.googleMap.animateToCameraPosition(camera)
+                    let delay = 2 * Double(NSEC_PER_SEC)
+                    let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                    dispatch_after(time, dispatch_get_main_queue()) {
+                        // After 2 seconds this line will be executed
+                        self.googleMap.animateWithCameraUpdate(GMSCameraUpdate.fitBounds(bounds))
+                    }
+                }
             }
         })
     }
