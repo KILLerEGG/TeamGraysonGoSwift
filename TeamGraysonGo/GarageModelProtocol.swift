@@ -61,10 +61,12 @@ class GarageModel: NSObject, NSURLSessionDataDelegate{
     
     func parseJSON() {
         
-        var jsonResult: NSMutableArray = NSMutableArray()
-        
+        //var jsonResult: NSMutableArray = NSMutableArray()
+        var jsonResult: NSArray?
+
         do {
-            jsonResult = try NSJSONSerialization.JSONObjectWithData(self.data as NSData, options: .AllowFragments) as! NSMutableArray
+            //jsonResult = try NSJSONSerialization.JSONObjectWithData(self.data as NSData, options: .AllowFragments) as! NSMutableArray
+            jsonResult = try NSJSONSerialization.JSONObjectWithData(self.data as NSData, options: .AllowFragments) as! NSArray
             
         }
         catch let error as NSError {
@@ -75,9 +77,9 @@ class GarageModel: NSObject, NSURLSessionDataDelegate{
         var jsonElement: NSDictionary = NSDictionary()
         let garageUsers: NSMutableArray = NSMutableArray()
         
-        for i in 0...(jsonResult.count - 1) {
+        for i in 0...(jsonResult!.count - 1) {
             
-            jsonElement = jsonResult[i] as! NSDictionary
+            jsonElement = jsonResult![i] as! NSDictionary
             
             let user = GarageModelObj()
             

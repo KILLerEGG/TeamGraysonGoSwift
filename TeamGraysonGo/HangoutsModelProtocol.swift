@@ -65,11 +65,15 @@ class HangoutsModel: NSObject, NSURLSessionDataDelegate{
         var jsonElement: NSDictionary = NSDictionary()
         
         do {
-            if let jsonResult = try NSJSONSerialization.JSONObjectWithData(self.data as NSData, options: .AllowFragments) as? NSMutableArray {
+            //if let jsonResult = try NSJSONSerialization.JSONObjectWithData(self.data as NSData, options: .AllowFragments) as? NSMutableArray {
+            
+            if let jsonResult: NSArray = try NSJSONSerialization.JSONObjectWithData(self.data as NSData, options: .AllowFragments) as? NSArray {
                 
-                for i in 0...(jsonResult.count - 1) {
+                for jsonRes in jsonResult {
+                //for i in 0...(jsonResult.count - 1) {
                     
-                    jsonElement = jsonResult[i] as! NSDictionary
+                    jsonElement = jsonRes as! NSDictionary
+                    //jsonElement = jsonResult[i] as! NSDictionary
                     
                     //the following insures none of the JsonElement values are nil through optional binding
                     if let id = jsonElement["id"] as? String,

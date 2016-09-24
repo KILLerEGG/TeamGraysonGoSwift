@@ -64,7 +64,8 @@ class SpecificHangoutModel: NSObject, NSURLSessionDataDelegate {
         var jsonElement: NSDictionary = NSDictionary()
         
         do {
-            if let jsonResult = try NSJSONSerialization.JSONObjectWithData(self.data as NSData, options: .AllowFragments) as? NSMutableArray {
+            //if let jsonResult = try NSJSONSerialization.JSONObjectWithData(self.data as NSData, options: .AllowFragments) as? NSMutableArray {
+            if let jsonResult: NSArray = try NSJSONSerialization.JSONObjectWithData(self.data as NSData, options: .AllowFragments) as? NSArray {
                 
                 for i in 0...(jsonResult.count - 1) {
                     

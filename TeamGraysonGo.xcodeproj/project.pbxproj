@@ -41,12 +41,12 @@
 		4C759D351D84DE11006B95E1 /* GoogleMapsCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C759D331D84DE11006B95E1 /* GoogleMapsCore.framework */; };
 		4C759D371D84DE44006B95E1 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4C759D361D84DE44006B95E1 /* GoogleMaps.bundle */; };
 		4C759D391D84DE82006B95E1 /* GooglePlacePicker.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4C759D381D84DE82006B95E1 /* GooglePlacePicker.bundle */; };
+		4CAFD4D81D94BBC9005B366E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CAFD4D61D94BBC9005B366E /* FBSDKCoreKit.framework */; };
+		4CAFD4D91D94BBC9005B366E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CAFD4D71D94BBC9005B366E /* FBSDKLoginKit.framework */; };
+		4CAFD4DB1D94BC03005B366E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CAFD4DA1D94BC03005B366E /* FBSDKShareKit.framework */; };
 		4CE7E6DD1D6123E7009CD2C3 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6DC1D6123E7009CD2C3 /* SWRevealViewController.m */; };
 		4CE7E6DF1D629C43009CD2C3 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6DE1D629C43009CD2C3 /* MenuController.swift */; };
-		4CE7E6E41D62D012009CD2C3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE7E6E31D62D012009CD2C3 /* FBSDKShareKit.framework */; };
-		4CE7E6E61D62D1C3009CD2C3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE7E6E51D62D1C3009CD2C3 /* FBSDKCoreKit.framework */; };
 		4CE7E6E81D62E7B2009CD2C3 /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE7E6E71D62E7B2009CD2C3 /* Bolts.framework */; };
-		4CE7E6EA1D62E7BF009CD2C3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CE7E6E91D62E7BF009CD2C3 /* FBSDKLoginKit.framework */; };
 		4CE7E6EC1D62E91E009CD2C3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6EB1D62E91E009CD2C3 /* LoginViewController.swift */; };
 		4CE7E6F01D652949009CD2C3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6EF1D652949009CD2C3 /* Reachability.m */; };
 		4CE7E6F21D6D5D5C009CD2C3 /* hangoutsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE7E6F11D6D5D5C009CD2C3 /* hangoutsViewController.swift */; };
@@ -115,14 +115,15 @@
 		4C759D331D84DE11006B95E1 /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsCore.framework; sourceTree = "<group>"; };
 		4C759D361D84DE44006B95E1 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		4C759D381D84DE82006B95E1 /* GooglePlacePicker.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlacePicker.bundle; path = GooglePlacePicker.framework/Versions/A/Resources/GooglePlacePicker.bundle; sourceTree = "<group>"; };
+		4CAFD4D61D94BBC9005B366E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../../Downloads/FacebookSDKs-iOS-4.15.1/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		4CAFD4D71D94BBC9005B366E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = "../../../../Downloads/FacebookSDKs-iOS-4.15.1/FBSDKLoginKit.framework"; sourceTree = "<group>"; };
+		4CAFD4DA1D94BC03005B366E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = "../../../../Downloads/FacebookSDKs-iOS-4.15.1/FBSDKShareKit.framework"; sourceTree = "<group>"; };
+		4CAFD4DC1D94BCEE005B366E /* TeamGraysonGo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TeamGraysonGo.entitlements; sourceTree = "<group>"; };
 		4CE7E6DA1D6123E6009CD2C3 /* TeamGraysonGo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TeamGraysonGo-Bridging-Header.h"; sourceTree = "<group>"; };
 		4CE7E6DB1D6123E7009CD2C3 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		4CE7E6DC1D6123E7009CD2C3 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		4CE7E6DE1D629C43009CD2C3 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
-		4CE7E6E31D62D012009CD2C3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
-		4CE7E6E51D62D1C3009CD2C3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		4CE7E6E71D62E7B2009CD2C3 /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		4CE7E6E91D62E7BF009CD2C3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		4CE7E6EB1D62E91E009CD2C3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4CE7E6EE1D652949009CD2C3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		4CE7E6EF1D652949009CD2C3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
@@ -145,6 +146,7 @@
 				4C759D351D84DE11006B95E1 /* GoogleMapsCore.framework in Frameworks */,
 				4C759D291D84D6C2006B95E1 /* OpenGLES.framework in Frameworks */,
 				4C759D271D84D6B2006B95E1 /* libz.tbd in Frameworks */,
+				4CAFD4DB1D94BC03005B366E /* FBSDKShareKit.framework in Frameworks */,
 				4C759D251D84D69B006B95E1 /* libc++.tbd in Frameworks */,
 				4C759D231D84D687006B95E1 /* ImageIO.framework in Frameworks */,
 				4C759D311D84DDD9006B95E1 /* GooglePlacePicker.framework in Frameworks */,
@@ -153,13 +155,12 @@
 				4C759D1D1D84D665006B95E1 /* CoreLocation.framework in Frameworks */,
 				4C759D1B1D84D65A006B95E1 /* CoreGraphics.framework in Frameworks */,
 				4C759D191D84D654006B95E1 /* CoreData.framework in Frameworks */,
+				4CAFD4D91D94BBC9005B366E /* FBSDKLoginKit.framework in Frameworks */,
 				4C759D171D84D642006B95E1 /* Accelerate.framework in Frameworks */,
 				4CE7E6E81D62E7B2009CD2C3 /* Bolts.framework in Frameworks */,
 				4C759D341D84DE11006B95E1 /* GoogleMaps.framework in Frameworks */,
-				4CE7E6E41D62D012009CD2C3 /* FBSDKShareKit.framework in Frameworks */,
-				4CE7E6EA1D62E7BF009CD2C3 /* FBSDKLoginKit.framework in Frameworks */,
 				4C759D131D84D574006B95E1 /* GoogleMapsBase.framework in Frameworks */,
-				4CE7E6E61D62D1C3009CD2C3 /* FBSDKCoreKit.framework in Frameworks */,
+				4CAFD4D81D94BBC9005B366E /* FBSDKCoreKit.framework in Frameworks */,
 				4C759D111D84D548006B95E1 /* GooglePlaces.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,6 +218,7 @@
 		4C2EAED61D584D870059072A /* TeamGraysonGo */ = {
 			isa = PBXGroup;
 			children = (
+				4CAFD4DC1D94BCEE005B366E /* TeamGraysonGo.entitlements */,
 				4CE7E6E01D62CF8D009CD2C3 /* Frameworks */,
 				4CE7E6D91D61237C009CD2C3 /* SWRevealViewController */,
 				4CE7E6ED1D652917009CD2C3 /* Reachability */,
@@ -278,15 +280,15 @@
 		4CE7E6E01D62CF8D009CD2C3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4CAFD4D61D94BBC9005B366E /* FBSDKCoreKit.framework */,
+				4CAFD4D71D94BBC9005B366E /* FBSDKLoginKit.framework */,
+				4CAFD4DA1D94BC03005B366E /* FBSDKShareKit.framework */,
 				4C759D321D84DE11006B95E1 /* GoogleMaps.framework */,
 				4C759D331D84DE11006B95E1 /* GoogleMapsCore.framework */,
 				4C759D301D84DDD9006B95E1 /* GooglePlacePicker.framework */,
 				4C759D121D84D574006B95E1 /* GoogleMapsBase.framework */,
 				4C759D101D84D548006B95E1 /* GooglePlaces.framework */,
-				4CE7E6E91D62E7BF009CD2C3 /* FBSDKLoginKit.framework */,
 				4CE7E6E71D62E7B2009CD2C3 /* Bolts.framework */,
-				4CE7E6E51D62D1C3009CD2C3 /* FBSDKCoreKit.framework */,
-				4CE7E6E31D62D012009CD2C3 /* FBSDKShareKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -370,6 +372,11 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = EGKF8KSN42;
 						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 					4C2EAEE71D584D870059072A = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -602,8 +609,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = TeamGraysonGo/TeamGraysonGo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = EGKF8KSN42;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TeamGraysonGo",
@@ -627,8 +636,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = TeamGraysonGo/TeamGraysonGo.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = EGKF8KSN42;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TeamGraysonGo",
