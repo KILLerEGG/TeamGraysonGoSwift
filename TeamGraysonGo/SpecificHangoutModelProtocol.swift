@@ -67,9 +67,11 @@ class SpecificHangoutModel: NSObject, NSURLSessionDataDelegate {
             //if let jsonResult = try NSJSONSerialization.JSONObjectWithData(self.data as NSData, options: .AllowFragments) as? NSMutableArray {
             if let jsonResult: NSArray = try NSJSONSerialization.JSONObjectWithData(self.data as NSData, options: .AllowFragments) as? NSArray {
                 
-                for i in 0...(jsonResult.count - 1) {
+                //for i in 0...(jsonResult.count - 1) {
+                for jsonRes in jsonResult {
                     
-                    jsonElement = jsonResult[i] as! NSDictionary
+                    //jsonElement = jsonResult[i] as! NSDictionary
+                    jsonElement = jsonRes as! NSDictionary
                     
                     //the following insures none of the JsonElement values are nil through optional binding
                     if let id = jsonElement["id"] as? String,
@@ -78,10 +80,10 @@ class SpecificHangoutModel: NSObject, NSURLSessionDataDelegate {
                         let notGoing = jsonElement["notgoing"] as? String,
                         let location = jsonElement["location"] as? String,
                         let address = jsonElement["address"] as? String,
-                        let minutes = jsonElement["minutes"] as? String
+                        let seconds = jsonElement["seconds"] as? String
                     {
                         
-                        let item = HangoutModelObj(id: id, organizer: organizer, going: going, notGoing: notGoing, location: location, address: address, minutes: Int(minutes)!)
+                        let item = HangoutModelObj(id: id, organizer: organizer, going: going, notGoing: notGoing, location: location, address: address, seconds: Double(seconds)!)
                         
                         hangoutItems.addObject(item)
                     }

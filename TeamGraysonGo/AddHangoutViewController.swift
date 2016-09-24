@@ -116,11 +116,12 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
     }
     
     func postHangout(){
-        let minutes = Int((whenDatePicker.date.timeIntervalSinceNow)/60) + 1
+        //let minutes = Int((whenDatePicker.date.timeIntervalSinceNow)/60) + 1
+        let seconds = whenDatePicker.date.timeIntervalSince1970
         let location: String = locationTextField.text!
         let url: NSURL = NSURL(string: self.urlPath)!
         let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
-        let bodyData = "organizer=\(self.first_name)&location=\(location)&address=\(self.address)&minutes=\(String(minutes))"
+        let bodyData = "organizer=\(self.first_name)&location=\(location)&address=\(self.address)&seconds=\(String(seconds))"
         request.HTTPMethod = "POST"
         request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
         
@@ -252,15 +253,17 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
     }
     
     @IBAction func addHangoutButton(sender: UIButton) {
-        let minutes = Int((whenDatePicker.date.timeIntervalSinceNow)/60) + 1
-        if locationTextField.hasText() && minutes > 0 {
+        //let seconds = whenDatePicker.date
+        //let minutes = Int((whenDatePicker.date.timeIntervalSinceNow)/60) + 1
+        //if locationTextField.hasText() && minutes > 0 {
+        if locationTextField.hasText() {
             self.checkHangout()
         }
-        else if minutes == 0 {
+        /*else if minutes == 0 {
             let alert = UIAlertController(title: "Input Error", message: "Invalid time. Hangouts are meant to be in the future, not at this very moment! Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
-        }
+        }*/
         else {
             let alert = UIAlertController(title: "Input Error", message: "Location field can't be empty. You have to have a hangout somewhere! Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))

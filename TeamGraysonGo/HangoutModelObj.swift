@@ -31,7 +31,7 @@ class HangoutModelObj: NSObject {
         self.date = date
     }
     
-    init(id: String, organizer: String, going: String, notGoing: String, location: String, address: String, minutes: Int){
+    init(id: String, organizer: String, going: String, notGoing: String, location: String, address: String, seconds: Double){
         
         super.init()
         
@@ -51,21 +51,22 @@ class HangoutModelObj: NSObject {
         }
         self.location = location
         self.address = address
-        self.date = convertDate(minutes)
+        self.date = convertDate(seconds)
     }
 
     
-    func convertDate(minutes: Int) -> NSTimeInterval{
-        let date = NSDate()
+    func convertDate(seconds: Double) -> NSTimeInterval{
+        //let date = NSDate()
         //let calendar = NSCalendar.currentCalendar()
         
-        if minutes > 0{
-            let date = date.dateByAddingTimeInterval(Double(minutes)*60.0)
+        if seconds > 0{
+            let date = NSDate(timeIntervalSince1970: seconds)
+            //let date = date.dateByAddingTimeInterval(Double(minutes)*60.0)
             return date.timeIntervalSinceNow
         }
-        else if minutes == 0{
+        /*else if minutes == 0{
             return date.timeIntervalSinceNow
-        }
+        }*/
         else{
             //let oldDate = calendar.dateByAddingUnit(.Minute, value: minutes, toDate: date, options: [])
             return NSTimeInterval(-1)
