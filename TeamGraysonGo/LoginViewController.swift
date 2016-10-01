@@ -45,7 +45,7 @@ public class Reachability {
     }
 }
 
-public class pointCentralization {
+/*public class pointCentralization {
 
 //        /** Degrees to Radian **/
 
@@ -112,7 +112,7 @@ public class pointCentralization {
         return result
         
     }
-}
+}*/
 
 class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
 

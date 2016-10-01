@@ -8,9 +8,13 @@
 
 import UIKit
 
-class MenuController: UITableViewController, FBSDKLoginButtonDelegate {
+class MenuController: UITableViewController, NSURLSessionDataDelegate, FBSDKLoginButtonDelegate {
     @IBOutlet weak var usernameWelcomeLabel: UILabel!
     @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
+    
+    var first_name:String = ""
+    var device_token:String = ""
+    var urlBase: String = "http://10.0.0.246/"
     
     let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, first_name, last_name"])
 
@@ -26,9 +30,81 @@ class MenuController: UITableViewController, FBSDKLoginButtonDelegate {
             else
             {
                 let firstName : NSString = result.valueForKey("first_name") as! NSString
+                self.first_name = firstName as String
                 self.usernameWelcomeLabel.text = "Welcome, \(firstName)"
+                
+                let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                let deviceToken = delegate.tokenString
+                self.device_token = deviceToken
+                print("Menu-Device Token: " + self.device_token)
+                self.checkConnection()
             }
         })
+    }
+    
+    func addDevice() {
+        let registerUrl: NSURL = NSURL(string: self.urlBase+"addDevice.php")!
+        let registerRequest:NSMutableURLRequest = NSMutableURLRequest(URL: registerUrl)
+        let registerBodyData = "user=\(self.first_name)&id=\(self.device_token)"
+        registerRequest.HTTPMethod = "POST"
+        registerRequest.HTTPBody = registerBodyData.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        NSURLConnection.sendAsynchronousRequest(registerRequest as NSURLRequest, queue: NSOperationQueue.mainQueue())
+        {(response, data, error) in
+            if let HTTPResponse = response as? NSHTTPURLResponse {
+                let statusCode = HTTPResponse.statusCode
+                if statusCode == 200 {
+                    print("registered device successfully")
+                }
+                else {
+                    print("error occurred in device registration")
+                }
+            }
+        }
+    }
+    
+    func checkConnection(){
+        if Reachability.connectedToNetwork() == true {
+            verifyUrl()
+        }
+    }
+    
+    func verifyUrl() {
+        
+        let url: NSURL = NSURL(string: self.urlBase)!
+        var session: NSURLSession!
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.timeoutIntervalForRequest = 2
+        configuration.timeoutIntervalForResource = 2
+        
+        session = NSURLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+        
+        let task = session.dataTaskWithURL(url)
+        
+        task.resume()
+    }
+    
+    func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
+    }
+    
+    func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
+        if error != nil {
+            if self.urlBase == "http://10.0.0.246/"{
+                self.urlBase = "http://50.156.82.136/"
+                self.verifyUrl()
+            }
+            else {
+                let alert = UIAlertController(title: "Connection Error", message: "Unable to connect to server right now. Please try again, or wait until later to try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                alert.addAction(UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default, handler: { action in
+                    self.checkConnection()
+                }))
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+            }
+        }
+        else {
+            self.addDevice()
+        }
     }
 
     override func didReceiveMemoryWarning() {

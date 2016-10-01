@@ -199,9 +199,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
                 self.address = "";
             }
         }
-        //let minutes = Int((datePicker.date.timeIntervalSinceNow)/60) + 1
         let seconds = datePicker.date.timeIntervalSince1970
-        //let location: String = locationTextField.text!
         let customAllowedSet =  NSCharacterSet(charactersInString:"!*'();:@&=+$,/?%#[]").invertedSet
         let location: String = locationTextField.text!.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
         let url: NSURL = NSURL(string: self.urlPath)!
@@ -248,7 +246,6 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
                 }
                 
                 if let place = place {
-                    //let coordinates = CLLocationCoordinate2DMake(place.coordinate.latitude, place.coordinate.longitude)
                     self.locationTextField.text = place.name
                     self.address = place.formattedAddress!
                     
@@ -283,7 +280,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
     @IBAction func doneEditing(sender: UIButton) {
         let seconds = datePicker.date
         let now = NSDate()
-        let timeInFiveMin = now.dateByAddingTimeInterval(4*60)
+        let timeInFiveMin = now.dateByAddingTimeInterval(4.0 * 60.0)
         if datePicker.date == self.originalDate {
             if locationTextField.hasText() {
                 self.prepareForEdit()
@@ -299,7 +296,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
                 self.prepareForEdit()
             }
             else if (timeInFiveMin.laterDate(seconds)) == timeInFiveMin {
-                let alert = UIAlertController(title: "Input Error", message: "Invalid time. Hangouts are meant to be in the future, not at this very moment! Please enter a time at least 5 minutes in the future.", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "Invalid Time", message: "Hangouts are meant to be in the future, not at this very moment! Please enter a time at least 5 minutes in the future.", preferredStyle: UIAlertControllerStyle.Alert)
                 alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
                 self.presentViewController(alert, animated: true, completion: nil)
             }

@@ -29,6 +29,7 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
    
     @IBOutlet weak var addHangoutBtn: UIButton!
     
+    var urlBase: String = "http://10.0.0.246/"
     var urlPath: String = "http://10.0.0.246/post_hangout.php"
     var getLocationsUrlPath: String = "http://10.0.0.246/get_prev_hangout_locations.php"
     var first_name: String = ""
@@ -121,6 +122,39 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
         //let location: String = locationTextField.text!
         let customAllowedSet =  NSCharacterSet(charactersInString:"!*'();:@&=+$,/?%#[]").invertedSet
         let location: String = locationTextField.text!.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
+        
+        let pushUrl: NSURL = NSURL(string: self.urlBase+"addHangoutPush.php")!
+        let pushRequest:NSMutableURLRequest = NSMutableURLRequest(URL: pushUrl)
+        let pushBodyData = "organizer=\(self.first_name)&location=\(location)&seconds=\(seconds)"
+        pushRequest.HTTPMethod = "POST"
+        pushRequest.HTTPBody = pushBodyData.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        NSURLConnection.sendAsynchronousRequest(pushRequest as NSURLRequest, queue: NSOperationQueue.mainQueue())
+        {(response, data, error) in
+            if let HTTPResponse = response as? NSHTTPURLResponse {
+                let statusCode = HTTPResponse.statusCode
+                if statusCode == 200 {
+                    print("sent push request successfully")
+                }
+            }
+        }
+        
+        let reminderPushUrl: NSURL = NSURL(string: self.urlBase+"schedulePush.php")!
+        let reminderPushRequest:NSMutableURLRequest = NSMutableURLRequest(URL: reminderPushUrl)
+        let reminderPushBodyData = "location=\(location)&seconds=\(seconds)"
+        reminderPushRequest.HTTPMethod = "POST"
+        reminderPushRequest.HTTPBody = reminderPushBodyData.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        NSURLConnection.sendAsynchronousRequest(reminderPushRequest as NSURLRequest, queue: NSOperationQueue.mainQueue())
+        {(response, data, error) in
+            if let HTTPResponse = response as? NSHTTPURLResponse {
+                let statusCode = HTTPResponse.statusCode
+                if statusCode == 200 {
+                    print("sent reminder push request successfully")
+                }
+            }
+        }
+        
         let url: NSURL = NSURL(string: self.urlPath)!
         let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
         let bodyData = "organizer=\(self.first_name)&location=\(location)&address=\(self.address)&seconds=\(String(seconds))"
@@ -160,6 +194,7 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
         if error != nil {
             if self.urlPath == "http://10.0.0.246/post_hangout.php"{
                 self.urlPath = "http://50.156.82.136/post_hangout.php"
+                self.urlBase = "http://50.156.82.136/"
                 self.verifyUrl()
             }
             else {
@@ -257,12 +292,12 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
     @IBAction func addHangoutButton(sender: UIButton) {
         let seconds = whenDatePicker.date
         let now = NSDate()
-        let timeInFiveMin = now.dateByAddingTimeInterval(4*60)
+        let timeInFiveMin = now.dateByAddingTimeInterval(4.0 * 60.0)
         if locationTextField.hasText() && ((timeInFiveMin.laterDate(seconds)) == seconds){
             self.checkHangout()
         }
         else if (timeInFiveMin.laterDate(seconds)) == timeInFiveMin {
-            let alert = UIAlertController(title: "Input Error", message: "Invalid time. Hangouts are meant to be in the future, not at this very moment! Please enter a time at least 5 minutes in the future.", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Invalid Time", message: "Hangouts are meant to be in the future, not at this very moment! Please enter a time at least 5 minutes in the future.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
         }
