@@ -25,7 +25,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
     
     var urlBase: String = "http://10.0.0.246/"
     var hangoutID: String?
-    var originalLocation: String?
+    var originalLocation: String = ""
     var location: String?
     var address: String = ""
     var seconds: NSTimeInterval?
@@ -37,7 +37,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
     var locationManager: CLLocationManager!
     var placePicker: GMSPlacePicker!
     var originalAddress: String?
-    var originalDate: NSDate?
+    var originalDate: NSTimeInterval?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +58,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         self.locationManager.startUpdatingLocation()
         self.locationManager.startUpdatingHeading()
         self.locationTextField.delegate = self
-        self.originalLocation = self.location
+        self.originalLocation = self.location!
         self.locationTextField.text = self.location
         self.editHangoutButton.layer.borderWidth = 1
         self.editHangoutButton.layer.cornerRadius = 5
@@ -66,7 +66,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         self.datePicker.date = NSDate(timeIntervalSince1970: seconds!)
         //self.datePicker.date = NSDate(timeIntervalSinceReferenceDate: seconds!)// NSDate.init(timeIntervalSinceNow: seconds!)
         self.datePicker.minimumDate = NSDate()
-        self.originalDate = self.datePicker.date
+        self.originalDate = seconds!
         
         if self.address != "" {
             self.originalAddress = self.address
@@ -206,11 +206,12 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         location = location.stringByTrimmingCharactersInSet(
             NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
-        if (location != self.originalLocation) || (seconds != self.originalDate) {
+        if (location != (self.originalLocation)) || (seconds != self.originalDate) {
         
             let pushUrl: NSURL = NSURL(string: self.urlBase+"editHangoutPush.php")!
             let pushRequest:NSMutableURLRequest = NSMutableURLRequest(URL: pushUrl)
-            let pushBodyData = "id=\(self.hangoutID!)&originalLocation=\(self.originalLocation)&location=\(location)&originalSeconds=\(String(self.originalDate))&seconds=\(String(seconds))"
+            let pushBodyData = "id=\(self.hangoutID!)&originalLocation=\(self.originalLocation)&location=\(location)&originalSeconds=\(self.originalDate!)&seconds=\(seconds)"
+            print(pushBodyData)
             pushRequest.HTTPMethod = "POST"
             pushRequest.HTTPBody = pushBodyData.dataUsingEncoding(NSUTF8StringEncoding)
             
@@ -223,6 +224,23 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
                     }
                 }
             }
+            
+            let reminderPushUrl: NSURL = NSURL(string: self.urlBase+"schedulePush.php")!
+            let reminderPushRequest:NSMutableURLRequest = NSMutableURLRequest(URL: reminderPushUrl)
+            let reminderPushBodyData = "location=\(location)&seconds=\(seconds)"
+            reminderPushRequest.HTTPMethod = "POST"
+            reminderPushRequest.HTTPBody = reminderPushBodyData.dataUsingEncoding(NSUTF8StringEncoding)
+            
+            NSURLConnection.sendAsynchronousRequest(reminderPushRequest as NSURLRequest, queue: NSOperationQueue.mainQueue())
+            {(response, data, error) in
+                if let HTTPResponse = response as? NSHTTPURLResponse {
+                    let statusCode = HTTPResponse.statusCode
+                    if statusCode == 200 {
+                        print("sent reminder push request successfully")
+                    }
+                }
+            }
+
         }
         
         let url: NSURL = NSURL(string: self.urlPath)!
@@ -244,13 +262,8 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
     
     /*
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
     */
+
     @IBAction func showPlacePicker(sender: UIButton) {
         if self.canOpenPlacePicker && (self.latitude != nil && self.longitude != nil) {
             
