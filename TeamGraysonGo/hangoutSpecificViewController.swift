@@ -26,6 +26,7 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
     @IBOutlet weak var notGoingBackgroundImage: UIImageView!
     var urlPath: String = "http://10.0.0.246/update_hangout.php"
     var cancelUrlPath: String = "http://10.0.0.246/cancel_hangout.php"
+    var urlBase: String = "http://10.0.0.246/"
     
     var hangoutItems: [HangoutModelObj] = [HangoutModelObj]()
     
@@ -591,6 +592,25 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
     }
     
     func cancelHangout() {
+        
+        let cancelPushUrl: NSURL = NSURL(string: self.urlBase+"cancelHangoutPush.php")!
+        let cancelPushRequest:NSMutableURLRequest = NSMutableURLRequest(URL: cancelPushUrl)
+        let cancelPushBodyData = "id=\(self.hangoutID!)&organizer=\(self.organizer!)&location=\(hangoutItems[0].location!)"
+        print(cancelPushUrl)
+        print(cancelPushBodyData)
+        cancelPushRequest.HTTPMethod = "POST"
+        cancelPushRequest.HTTPBody = cancelPushBodyData.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        NSURLConnection.sendAsynchronousRequest(cancelPushRequest as NSURLRequest, queue: NSOperationQueue.mainQueue())
+        {(response, data, error) in
+            if let HTTPResponse = response as? NSHTTPURLResponse {
+                let statusCode = HTTPResponse.statusCode
+                if statusCode == 200 {
+                    print("sent cancel push request successfully")
+                }
+            }
+        }
+        
         let url: NSURL = NSURL(string: self.cancelUrlPath)!
         let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
         let bodyData = "id=\(self.hangoutID!)&user=\(self.first_name)"
@@ -717,6 +737,7 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
             if error != nil {
                 if self.cancelUrlPath == "http://10.0.0.246/cancel_hangout.php"{
                     self.cancelUrlPath = "http://50.156.82.136/cancel_hangout.php"
+                    self.urlBase = "http://50.156.82.136/"
                     self.verifyUrl()
                 }
                 else {

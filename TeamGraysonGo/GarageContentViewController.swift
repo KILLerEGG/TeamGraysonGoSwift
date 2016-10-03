@@ -14,6 +14,7 @@ class GarageContentViewController: UIViewController {
     
     @IBOutlet weak var passLargeBackground: UIImageView!
     @IBOutlet weak var weekTitleLabel: UILabel!
+    @IBOutlet weak var dateTextLabel: UILabel!
     @IBOutlet weak var garageUser1NameLabel: UILabel!
     @IBOutlet weak var garageUser2NameLabel: UILabel!
     @IBOutlet weak var passUserNameLabel: UILabel!
@@ -25,6 +26,7 @@ class GarageContentViewController: UIViewController {
     var pageIndex: Int = 0
     
     var weekText: String?
+    var dateText: String?
     var garageUser1Text: String?
     var garageUser2Text: String?
     var passUserText: String?
@@ -52,6 +54,10 @@ class GarageContentViewController: UIViewController {
         
         if (weekTitleLabel != nil){
             weekTitleLabel.text = self.weekText
+        }
+        
+        if (dateTextLabel != nil){
+            dateTextLabel.text = self.dateText
         }
         
         if (garageUser1NameLabel != nil){

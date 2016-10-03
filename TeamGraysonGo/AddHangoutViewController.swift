@@ -121,7 +121,9 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
         let seconds = whenDatePicker.date.timeIntervalSince1970
         //let location: String = locationTextField.text!
         let customAllowedSet =  NSCharacterSet(charactersInString:"!*'();:@&=+$,/?%#[]").invertedSet
-        let location: String = locationTextField.text!.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
+        var location: String = locationTextField.text!.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
+        location = location.stringByTrimmingCharactersInSet(
+            NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
         let pushUrl: NSURL = NSURL(string: self.urlBase+"addHangoutPush.php")!
         let pushRequest:NSMutableURLRequest = NSMutableURLRequest(URL: pushUrl)

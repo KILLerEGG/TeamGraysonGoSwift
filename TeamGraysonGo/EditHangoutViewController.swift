@@ -23,8 +23,9 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
     @IBOutlet weak var manualLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
     
-    
+    var urlBase: String = "http://10.0.0.246/"
     var hangoutID: String?
+    var originalLocation: String?
     var location: String?
     var address: String = ""
     var seconds: NSTimeInterval?
@@ -40,8 +41,6 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(self.hangoutID!)
         
         self.googleMap.hidden = true
         self.googleMap.delegate = self
@@ -59,6 +58,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         self.locationManager.startUpdatingLocation()
         self.locationManager.startUpdatingHeading()
         self.locationTextField.delegate = self
+        self.originalLocation = self.location
         self.locationTextField.text = self.location
         self.editHangoutButton.layer.borderWidth = 1
         self.editHangoutButton.layer.cornerRadius = 5
@@ -177,6 +177,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         if error != nil {
             if self.urlPath == "http://10.0.0.246/edit_hangout.php"{
                 self.urlPath = "http://50.156.82.136/edit_hangout.php"
+                self.urlBase = "http://50.156.82.136/"
                 self.verifyUrl()
             }
             else {
@@ -201,7 +202,29 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         }
         let seconds = datePicker.date.timeIntervalSince1970
         let customAllowedSet =  NSCharacterSet(charactersInString:"!*'();:@&=+$,/?%#[]").invertedSet
-        let location: String = locationTextField.text!.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
+        var location: String = locationTextField.text!.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
+        location = location.stringByTrimmingCharactersInSet(
+            NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        if (location != self.originalLocation) || (seconds != self.originalDate) {
+        
+            let pushUrl: NSURL = NSURL(string: self.urlBase+"editHangoutPush.php")!
+            let pushRequest:NSMutableURLRequest = NSMutableURLRequest(URL: pushUrl)
+            let pushBodyData = "id=\(self.hangoutID!)&originalLocation=\(self.originalLocation)&location=\(location)&originalSeconds=\(String(self.originalDate))&seconds=\(String(seconds))"
+            pushRequest.HTTPMethod = "POST"
+            pushRequest.HTTPBody = pushBodyData.dataUsingEncoding(NSUTF8StringEncoding)
+            
+            NSURLConnection.sendAsynchronousRequest(pushRequest as NSURLRequest, queue: NSOperationQueue.mainQueue())
+            {(response, data, error) in
+                if let HTTPResponse = response as? NSHTTPURLResponse {
+                    let statusCode = HTTPResponse.statusCode
+                    if statusCode == 200 {
+                        print("sent edit push request successfully")
+                    }
+                }
+            }
+        }
+        
         let url: NSURL = NSURL(string: self.urlPath)!
         let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
         let bodyData = "id=\(self.hangoutID!)&location=\(location)&address=\(self.address)&seconds=\(String(seconds))"

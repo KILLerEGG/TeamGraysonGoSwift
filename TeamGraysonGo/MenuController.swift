@@ -48,7 +48,7 @@ class MenuController: UITableViewController, NSURLSessionDataDelegate, FBSDKLogi
         let registerBodyData = "user=\(self.first_name)&id=\(self.device_token)"
         registerRequest.HTTPMethod = "POST"
         registerRequest.HTTPBody = registerBodyData.dataUsingEncoding(NSUTF8StringEncoding)
-        
+                
         NSURLConnection.sendAsynchronousRequest(registerRequest as NSURLRequest, queue: NSOperationQueue.mainQueue())
         {(response, data, error) in
             if let HTTPResponse = response as? NSHTTPURLResponse {

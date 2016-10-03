@@ -35,6 +35,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [NSObject : AnyObject], completionHandler: () -> Void) {
+        // 1
+        /*let aps = userInfo["aps"] as! [String: AnyObject]
+        
+        // 2
+        if let newsItem = createNewNewsItem(aps) {
+            (window?.rootViewController as? UITabBarController)?.selectedIndex = 1
+            
+            // 3
+            if identifier == "VIEW_IDENTIFIER", let url = NSURL(string: newsItem.link) {
+                let safari = SFSafariViewController(URL: url)
+                window?.rootViewController?.presentViewController(safari, animated: true, completion: nil)
+            }
+        }
+        
+        // 4
+        completionHandler()*/
+    }
+    
     func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
         if notificationSettings.types != .None {
             application.registerForRemoteNotifications()
@@ -104,8 +123,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func registerForPushNotifications(application: UIApplication) {
+        let viewAction = UIMutableUserNotificationAction()
+        viewAction.identifier = "VIEW_IDENTIFIER"
+        viewAction.title = "View"
+        viewAction.activationMode = .Foreground
+        
+        let hangoutCategory = UIMutableUserNotificationCategory()
+        hangoutCategory.identifier = "HANGOUT_CATEGORY"
+        hangoutCategory.setActions([viewAction], forContext: .Default)
+        
         let notificationSettings = UIUserNotificationSettings(
-            forTypes: [.Badge, .Sound, .Alert], categories: nil)
+            forTypes: [.Badge, .Sound, .Alert], categories: [hangoutCategory])
         application.registerUserNotificationSettings(notificationSettings)
     }
 }

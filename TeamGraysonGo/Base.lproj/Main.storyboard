@@ -2593,6 +2593,11 @@
                                     </mask>
                                 </variation>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date Text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gtD-LI-IBu">
+                                <fontDescription key="fontDescription" name="AvenirNextCondensed-MediumItalic" family="Avenir Next Condensed" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -2655,6 +2660,7 @@
                             <constraint firstItem="zJe-SR-wEm" firstAttribute="top" secondItem="vBT-q5-wZd" secondAttribute="bottom" constant="90" id="F8v-wN-BSB"/>
                             <constraint firstItem="RfF-2L-tUb" firstAttribute="top" secondItem="BFN-BL-ywb" secondAttribute="bottom" constant="6" id="FGF-ig-n5o"/>
                             <constraint firstItem="Hxp-Se-EsO" firstAttribute="centerX" secondItem="RfF-2L-tUb" secondAttribute="centerX" id="FLe-Gs-Nv1"/>
+                            <constraint firstItem="B5q-TR-b9E" firstAttribute="top" secondItem="gtD-LI-IBu" secondAttribute="bottom" constant="1" id="FZW-XL-nZ9"/>
                             <constraint firstItem="e8r-fH-VZg" firstAttribute="centerY" secondItem="vBT-q5-wZd" secondAttribute="centerY" id="Fay-V6-zS9"/>
                             <constraint firstItem="RfF-2L-tUb" firstAttribute="top" secondItem="5ZA-OE-EYK" secondAttribute="bottom" constant="38" id="G61-eR-LMx"/>
                             <constraint firstItem="JZQ-02-Sdr" firstAttribute="top" secondItem="YEJ-Kk-QKB" secondAttribute="bottom" constant="4" id="GPz-CI-zUf"/>
@@ -2700,6 +2706,7 @@
                             <constraint firstItem="aOr-b4-qjz" firstAttribute="centerY" secondItem="d2r-wl-ZfT" secondAttribute="centerY" id="PPa-xu-BdL"/>
                             <constraint firstItem="oFC-Pb-yfo" firstAttribute="top" secondItem="RfF-2L-tUb" secondAttribute="bottom" constant="102" id="Q8y-H8-56L"/>
                             <constraint firstItem="zJe-SR-wEm" firstAttribute="leading" secondItem="RfF-2L-tUb" secondAttribute="trailing" constant="14" id="RHL-KV-cW1"/>
+                            <constraint firstItem="gtD-LI-IBu" firstAttribute="leading" secondItem="5ae-eN-2YT" secondAttribute="leadingMargin" id="RQh-fc-Ar2"/>
                             <constraint firstItem="5p5-oo-WAD" firstAttribute="top" secondItem="JZQ-02-Sdr" secondAttribute="bottom" constant="132" id="RhO-2f-fvK"/>
                             <constraint firstItem="smJ-0x-Fbk" firstAttribute="bottom" secondItem="9Ca-lO-piN" secondAttribute="bottom" id="RlO-wR-dvp"/>
                             <constraint firstItem="MfE-uR-Yog" firstAttribute="centerY" secondItem="e8r-fH-VZg" secondAttribute="centerY" id="Ryo-9y-ThO"/>
@@ -2736,6 +2743,7 @@
                             <constraint firstItem="zJe-SR-wEm" firstAttribute="trailing" secondItem="5ae-eN-2YT" secondAttribute="trailingMargin" id="Zby-lh-wO9"/>
                             <constraint firstItem="smJ-0x-Fbk" firstAttribute="width" secondItem="BFN-BL-ywb" secondAttribute="width" id="ZmR-95-K4Z"/>
                             <constraint firstItem="Hxp-Se-EsO" firstAttribute="top" secondItem="B5q-TR-b9E" secondAttribute="bottom" constant="8" symbolic="YES" id="a6k-3u-6Bu"/>
+                            <constraint firstItem="gtD-LI-IBu" firstAttribute="trailing" secondItem="5ae-eN-2YT" secondAttribute="trailingMargin" id="aAZ-BR-Gs2"/>
                             <constraint firstItem="YFH-Pz-nJn" firstAttribute="top" secondItem="JZQ-02-Sdr" secondAttribute="bottom" constant="34" id="aVK-Rm-bXN"/>
                             <constraint firstItem="Hxp-Se-EsO" firstAttribute="leading" secondItem="5ae-eN-2YT" secondAttribute="leadingMargin" constant="4" id="aY6-w2-QRd"/>
                             <constraint firstItem="RfF-2L-tUb" firstAttribute="top" secondItem="5ZA-OE-EYK" secondAttribute="bottom" constant="24" id="b6J-yO-A5F"/>
@@ -2763,6 +2771,7 @@
                             <constraint firstItem="zJe-SR-wEm" firstAttribute="top" secondItem="vBT-q5-wZd" secondAttribute="bottom" constant="90" id="gY5-wi-FjM"/>
                             <constraint firstItem="5p5-oo-WAD" firstAttribute="leading" secondItem="Hxp-Se-EsO" secondAttribute="trailing" constant="61" id="gbc-DL-bbd"/>
                             <constraint firstItem="Hxp-Se-EsO" firstAttribute="leading" secondItem="5ae-eN-2YT" secondAttribute="leadingMargin" constant="4" id="gdk-h5-IQE"/>
+                            <constraint firstItem="gtD-LI-IBu" firstAttribute="top" secondItem="JZQ-02-Sdr" secondAttribute="bottom" constant="8" symbolic="YES" id="ggh-X5-890"/>
                             <constraint firstAttribute="trailingMargin" secondItem="smJ-0x-Fbk" secondAttribute="trailing" constant="6" id="gpw-q4-nrZ"/>
                             <constraint firstItem="oFC-Pb-yfo" firstAttribute="top" secondItem="zJe-SR-wEm" secondAttribute="bottom" constant="98" id="grK-7A-NQH"/>
                             <constraint firstItem="zJe-SR-wEm" firstAttribute="leading" secondItem="BFN-BL-ywb" secondAttribute="trailing" constant="25" id="grc-a7-29Y"/>
@@ -3423,6 +3432,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Garage" id="tAZ-1a-SJD"/>
                     <connections>
+                        <outlet property="dateTextLabel" destination="gtD-LI-IBu" id="YsZ-ME-Aav"/>
                         <outlet property="garageLargeBackground" destination="Hxp-Se-EsO" id="uQJ-FN-DxK"/>
                         <outlet property="garageUser1ImageView" destination="aOr-b4-qjz" id="4u0-WK-gLS"/>
                         <outlet property="garageUser1NameLabel" destination="5ZA-OE-EYK" id="qFN-2F-fFc"/>
@@ -3436,7 +3446,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3WN-5h-TAL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1405" y="3"/>
+            <point key="canvasLocation" x="1404" y="2.2488755622188905"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="SG6-NV-J0h">
@@ -3452,6 +3462,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fFu-kW-y8i"/>
-        <segue reference="Pme-nJ-fWZ"/>
+        <segue reference="c3p-wM-eEZ"/>
     </inferredMetricsTieBreakers>
 </document>
