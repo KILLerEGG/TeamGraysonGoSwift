@@ -10,16 +10,6 @@ import UIKit
 import Foundation
 import SystemConfiguration
 
-class pictures: NSObject {
-    var name: String
-    var id: String
-    
-    init(name: String, id: String) {
-        self.name = name
-        self.id = id
-    }
-}
-
 class viewController: UIViewController, UIPageViewControllerDataSource, GarageModelProtocal {
     
     @IBOutlet weak var garageNavBar: UINavigationItem!
@@ -245,7 +235,7 @@ class viewController: UIViewController, UIPageViewControllerDataSource, GarageMo
                 //self.garageNavBar.title = String(index)
                 garageContentController.weekText = "Last Week"
                 let prevEnd: NSDate = getDate(.Previous, "Sunday", newStartDate: NSDate())
-                garageContentController.dateText = dateFormatter.stringFromDate(prevEnd) + " - " + dateFormatter.stringFromDate(getDate(.Previous, "Monday", newStartDate: prevEnd))
+                garageContentController.dateText = dateFormatter.stringFromDate(getDate(.Previous, "Monday", newStartDate: prevEnd)) + " - " + dateFormatter.stringFromDate(prevEnd)
                 garageContentController.garageUser1Text = self.prevGarageUser1.name
                 garageContentController.garageUser2Text = self.prevGarageUser2.name
                 garageContentController.passUserText = self.prevPassUser.name

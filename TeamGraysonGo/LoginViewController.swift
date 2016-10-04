@@ -11,6 +11,16 @@ import CoreLocation
 import Foundation
 import SystemConfiguration
 
+class pictures: NSObject {
+    var name: String
+    var id: String
+    
+    init(name: String, id: String) {
+        self.name = name
+        self.id = id
+    }
+}
+
 let globalPicsArray = [pictures(name: "Alan", id: "100000674808472"), pictures(name: "Rahul", id: "1050570262"), pictures(name: "Molly", id: "1553593244"), pictures(name: "Brittnie", id: "508642311"), pictures(name: "Graham", id: "571994343")]
 
 public class Reachability {
