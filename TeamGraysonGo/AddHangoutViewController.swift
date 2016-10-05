@@ -23,6 +23,8 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
     @IBOutlet weak var placeMap: GMSMapView!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var locationBackgroundImage: UIImageView!
+    @IBOutlet weak var whenBackgroundImage: UIImageView!
     var canOpenPlacePicker: Bool = true
     var address: String = ""
     var locationMarker: GMSMarker?
@@ -74,6 +76,12 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
         self.addHangoutBtn.layer.borderColor = UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0).CGColor
         self.addHangoutBtn.layer.borderWidth = 1
         self.addHangoutBtn.layer.cornerRadius = 5
+        self.locationBackgroundImage.layer.borderWidth = 1
+        self.locationBackgroundImage.layer.cornerRadius = 5
+        self.locationBackgroundImage.layer.borderColor = UIColor.orangeColor().CGColor
+        self.whenBackgroundImage.layer.borderWidth = 1
+        self.whenBackgroundImage.layer.cornerRadius = 5
+        self.whenBackgroundImage.layer.borderColor = UIColor.orangeColor().CGColor
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -112,6 +120,8 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
             addHangoutBtn.hidden = true
             showPlacePicker.hidden = true
             placeMap.hidden = true
+            locationBackgroundImage.hidden = true
+            whenBackgroundImage.hidden = true
             verifyUrl()
         }
     }
@@ -120,8 +130,10 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
         //let minutes = Int((whenDatePicker.date.timeIntervalSinceNow)/60) + 1
         let seconds = whenDatePicker.date.timeIntervalSince1970
         //let location: String = locationTextField.text!
-        let customAllowedSet =  NSCharacterSet(charactersInString:"!*'();:@&=+$,/?%#[]").invertedSet
+        //=\"#%/<>?@\\^`{|}
+        let customAllowedSet = NSCharacterSet(charactersInString:"!*'();:@&=+$,/?%#[]").invertedSet
         var location: String = locationTextField.text!.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
+
         location = location.stringByTrimmingCharactersInSet(
             NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
@@ -159,7 +171,13 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
         
         let url: NSURL = NSURL(string: self.urlPath)!
         let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
-        let bodyData = "organizer=\(self.first_name)&location=\(location)&address=\(self.address)&seconds=\(String(seconds))"
+        let sqlArray = locationTextField.text!.componentsSeparatedByString("'")
+        var sqlLocation = sqlArray.joinWithSeparator("''")
+        sqlLocation = sqlLocation.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
+        sqlLocation = sqlLocation.stringByTrimmingCharactersInSet(
+            NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        let bodyData = "organizer=\(self.first_name)&location=\(sqlLocation)&address=\(self.address)&seconds=\(String(seconds))"
         request.HTTPMethod = "POST"
         request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
         
@@ -225,6 +243,7 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
     func locationManager(manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]){
         
+        self.canOpenPlacePicker = true
         let location:CLLocation = locations.last!
         self.latitude = location.coordinate.latitude
         self.longitude = location.coordinate.longitude
@@ -235,10 +254,8 @@ class AddHangoutViewController: UIViewController, NSURLSessionDataDelegate, GMSM
     
     
     @IBAction func showPlacePickerAction(sender: UIButton) {
-        /*self.locationManager = CLLocationManager()
-        self.locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.requestLocation()*/
+
+        self.locationManager.requestLocation()
         
         if self.canOpenPlacePicker && (self.latitude != nil && self.longitude != nil) {
         

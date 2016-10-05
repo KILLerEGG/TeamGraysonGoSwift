@@ -22,6 +22,8 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
     @IBOutlet weak var whenLabel: UILabel!
     @IBOutlet weak var manualLabel: UILabel!
     @IBOutlet weak var locationLabel: UILabel!
+    @IBOutlet weak var locationBackgroundImage: UIImageView!
+    @IBOutlet weak var whenBackgroundImage: UIImageView!
     
     var urlBase: String = "http://10.0.0.246/"
     var hangoutID: String?
@@ -72,6 +74,13 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
             self.originalAddress = self.address
             forwardGeocoding(self.address, place: self.location!)
         }
+
+        self.locationBackgroundImage.layer.borderWidth = 1
+        self.locationBackgroundImage.layer.cornerRadius = 5
+        self.locationBackgroundImage.layer.borderColor = UIColor.orangeColor().CGColor
+        self.whenBackgroundImage.layer.borderWidth = 1
+        self.whenBackgroundImage.layer.cornerRadius = 5
+        self.whenBackgroundImage.layer.borderColor = UIColor.orangeColor().CGColor
     }
     
     func forwardGeocoding(address: String, place: String) {
@@ -111,6 +120,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
     func locationManager(manager: CLLocationManager,
                          didUpdateLocations locations: [CLLocation]){
         
+        self.canOpenPlacePicker = true
         let location:CLLocation = locations.last!
         self.latitude = location.coordinate.latitude
         self.longitude = location.coordinate.longitude
@@ -151,6 +161,8 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
             editHangoutButton.hidden = true
             locationSearchButton.hidden = true
             googleMap.hidden = true
+            locationBackgroundImage.hidden = true
+            whenBackgroundImage.hidden = true
             verifyUrl()
         }
     }
@@ -203,6 +215,7 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         let seconds = datePicker.date.timeIntervalSince1970
         let customAllowedSet =  NSCharacterSet(charactersInString:"!*'();:@&=+$,/?%#[]").invertedSet
         var location: String = locationTextField.text!.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
+
         location = location.stringByTrimmingCharactersInSet(
             NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
@@ -245,7 +258,13 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         
         let url: NSURL = NSURL(string: self.urlPath)!
         let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
-        let bodyData = "id=\(self.hangoutID!)&location=\(location)&address=\(self.address)&seconds=\(String(seconds))"
+        let sqlArray = locationTextField.text!.componentsSeparatedByString("'")
+        var sqlLocation = sqlArray.joinWithSeparator("''")
+        sqlLocation = sqlLocation.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
+        sqlLocation = sqlLocation.stringByTrimmingCharactersInSet(
+            NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
+        let bodyData = "id=\(self.hangoutID!)&location=\(sqlLocation)&address=\(self.address)&seconds=\(String(seconds))"
         request.HTTPMethod = "POST"
         request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
         
@@ -265,6 +284,9 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
     */
 
     @IBAction func showPlacePicker(sender: UIButton) {
+        
+        self.locationManager.requestLocation()
+        
         if self.canOpenPlacePicker && (self.latitude != nil && self.longitude != nil) {
             
             let center = CLLocationCoordinate2DMake(self.latitude, self.longitude)
