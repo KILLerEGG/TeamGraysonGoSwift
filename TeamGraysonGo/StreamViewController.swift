@@ -104,9 +104,10 @@ class StreamViewController: UIViewController, NSURLSessionDataDelegate {
         self.streamButton.layer.borderColor = UIColor.lightGrayColor().CGColor
         self.streamButton.layer.cornerRadius = 5
         self.streamButton.enabled = false
-        self.checkStream() //JUST FOR TESTING NIGHT! UNCOMMENT BELOW FOR NON-ADMIN BUILD
+        //self.checkStream() //JUST FOR TESTING NIGHT! UNCOMMENT BELOW FOR NON-ADMIN BUILD
         
-        /*let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        calendar.timeZone = NSTimeZone(name: "America/Los_Angeles")!
         let now: NSDate = NSDate()
         let morningDateTime = calendar.dateBySettingHour(8, minute: 0, second: 0, ofDate: now, options: NSCalendarOptions.MatchFirst)!
         let eveningDateTime = calendar.dateBySettingHour(21, minute: 0, second: 0, ofDate: now, options: NSCalendarOptions.MatchFirst)!
@@ -117,13 +118,13 @@ class StreamViewController: UIViewController, NSURLSessionDataDelegate {
         else {
             activityIndicator.stopAnimating()
             
-            let alert = UIAlertController(title: "Stream Error", message: "Stream is offline until 8am. Please try again then.", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Stream Error", message: "Stream is offline until 8am PST. Please try again then.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
             self.activityIndicator.stopAnimating()
             self.streamButton.enabled = true
             self.streamButton.layer.borderColor = UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0).CGColor
-        }*/
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -137,9 +138,10 @@ class StreamViewController: UIViewController, NSURLSessionDataDelegate {
         self.streamButton.layer.borderColor = UIColor.lightGrayColor().CGColor
         self.activityIndicator.startAnimating()
         self.urlPath = "http://10.0.0.246/stream/server/stream.m3u8"
-        self.checkStream() //JUST FOR TESTING NIGHT! UNCOMMENT BELOW FOR NON-ADMIN BUILD
+        //self.checkStream() //JUST FOR TESTING NIGHT! UNCOMMENT BELOW FOR NON-ADMIN BUILD
         
-        /*let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        calendar.timeZone = NSTimeZone(name: "America/Los_Angeles")!
         let now: NSDate = NSDate()
         let morningDateTime = calendar.dateBySettingHour(8, minute: 0, second: 0, ofDate: now, options: NSCalendarOptions.MatchFirst)!
         let eveningDateTime = calendar.dateBySettingHour(21, minute: 0, second: 0, ofDate: now, options: NSCalendarOptions.MatchFirst)!
@@ -149,12 +151,12 @@ class StreamViewController: UIViewController, NSURLSessionDataDelegate {
             self.checkStream()
         }
         else {
-            let alert = UIAlertController(title: "Stream Error", message: "Stream is offline until 8am. Please try again then.", preferredStyle: UIAlertControllerStyle.Alert)
+            let alert = UIAlertController(title: "Stream Error", message: "Stream is offline until 8am PST. Please try again then.", preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(alert, animated: true, completion: nil)
             self.activityIndicator.stopAnimating()
             self.streamButton.enabled = true
             self.streamButton.layer.borderColor = UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0).CGColor
-        }*/
+        }
     }
 }

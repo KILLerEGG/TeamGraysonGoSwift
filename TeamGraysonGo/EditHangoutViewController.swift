@@ -219,6 +219,10 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
         location = location.stringByTrimmingCharactersInSet(
             NSCharacterSet.whitespaceAndNewlineCharacterSet())
         
+        self.originalLocation = self.originalLocation.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
+        self.originalLocation = self.originalLocation.stringByTrimmingCharactersInSet(
+            NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
         if (location != (self.originalLocation)) || (seconds != self.originalDate) {
         
             let pushUrl: NSURL = NSURL(string: self.urlBase+"editHangoutPush.php")!

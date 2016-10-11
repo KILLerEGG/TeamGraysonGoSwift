@@ -240,8 +240,6 @@ class hangoutsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(hangoutTableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: CustomHangoutCell = hangoutTableView.dequeueReusableCellWithIdentifier("hangoutCell")! as! CustomHangoutCell
-        print(hangoutItems[(indexPath as NSIndexPath).item].organizer)
-        print(self.first_name)
         if (hangoutItems[(indexPath as NSIndexPath).item].organizer)! == self.first_name {
             cell.organizerLabel.text = "You are going to " + hangoutItems[(indexPath as NSIndexPath).item].location! + "!"
         }

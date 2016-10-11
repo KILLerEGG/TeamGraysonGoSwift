@@ -593,11 +593,14 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
     
     func cancelHangout() {
         
+        let customAllowedSet = NSCharacterSet(charactersInString:"!*'();:@&=+$,/?%#[]").invertedSet
+        var location: String = hangoutItems[0].location!.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
+        
+        location = location.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+        
         let cancelPushUrl: NSURL = NSURL(string: self.urlBase+"cancelHangoutPush.php")!
         let cancelPushRequest:NSMutableURLRequest = NSMutableURLRequest(URL: cancelPushUrl)
-        let cancelPushBodyData = "id=\(self.hangoutID!)&organizer=\(self.organizer!)&location=\(hangoutItems[0].location!)"
-        print(cancelPushUrl)
-        print(cancelPushBodyData)
+        let cancelPushBodyData = "id=\(self.hangoutID!)&organizer=\(self.organizer!)&location=\(location)"
         cancelPushRequest.HTTPMethod = "POST"
         cancelPushRequest.HTTPBody = cancelPushBodyData.dataUsingEncoding(NSUTF8StringEncoding)
         
@@ -607,30 +610,29 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
                 let statusCode = HTTPResponse.statusCode
                 if statusCode == 200 {
                     print("sent cancel push request successfully")
-                }
-            }
-        }
-        
-        let url: NSURL = NSURL(string: self.cancelUrlPath)!
-        let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
-        let bodyData = "id=\(self.hangoutID!)&user=\(self.first_name)"
-        request.HTTPMethod = "POST"
-        request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
-        
-        NSURLConnection.sendAsynchronousRequest(request as NSURLRequest, queue: NSOperationQueue.mainQueue())
-        {(response, data, error) in
-            if let HTTPResponse = response as? NSHTTPURLResponse {
-                let statusCode = HTTPResponse.statusCode
-                self.loadingIndicator.stopAnimating()
-                if statusCode == 200 {
-                    self.performSegueWithIdentifier("exitHangoutDetail", sender: nil)
-                }
-                else {
-                    let alert = UIAlertController(title: "Database Error", message: "Error when trying to cancel hangout. Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default, handler: { action in
-                        self.cancel()
-                    }))
-                    self.presentViewController(alert, animated: true, completion: nil)
+                    let url: NSURL = NSURL(string: self.cancelUrlPath)!
+                    let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
+                    let bodyData = "id=\(self.hangoutID!)&user=\(self.first_name)"
+                    request.HTTPMethod = "POST"
+                    request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+                    
+                    NSURLConnection.sendAsynchronousRequest(request as NSURLRequest, queue: NSOperationQueue.mainQueue())
+                    {(response, data, error) in
+                        if let HTTPResponse = response as? NSHTTPURLResponse {
+                            let statusCode = HTTPResponse.statusCode
+                            self.loadingIndicator.stopAnimating()
+                            if statusCode == 200 {
+                                self.performSegueWithIdentifier("exitHangoutDetail", sender: nil)
+                            }
+                            else {
+                                let alert = UIAlertController(title: "Database Error", message: "Error when trying to cancel hangout. Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                                alert.addAction(UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default, handler: { action in
+                                    self.cancel()
+                                }))
+                                self.presentViewController(alert, animated: true, completion: nil)
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -648,6 +650,11 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
             if let HTTPResponse = response as? NSHTTPURLResponse {
                 let statusCode = HTTPResponse.statusCode
                 if statusCode == 200 {
+                    let customAllowedSet = NSCharacterSet(charactersInString:"!*'();:@&=+$,/?%#[]").invertedSet
+                    var placeLocation: String = self.hangoutItems[0].location!.stringByAddingPercentEncodingWithAllowedCharacters(customAllowedSet)!
+                    
+                    placeLocation = placeLocation.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
+                    
                     for picture in globalPicsArray {
                         if picture.name == self.first_name {
                             let userUrl = NSURL(string: "http://graph.facebook.com/"+picture.id+"/picture?type=large")
@@ -671,6 +678,30 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
                                             self.userNotGoingImage?.removeFromSuperview()
                                             self.userGoingImage = imageView
                                         }
+                                        
+                                        let goingPushUrl: NSURL = NSURL(string: self.urlBase+"goingHangoutPush.php")!
+                                        let goingPushRequest:NSMutableURLRequest = NSMutableURLRequest(URL: goingPushUrl)
+                                        let goingPushBodyData = "id=\(self.hangoutID!)&organizer=\(self.organizer!)&user=\(self.first_name)&location=\(placeLocation)"
+                                        goingPushRequest.HTTPMethod = "POST"
+                                        goingPushRequest.HTTPBody = goingPushBodyData.dataUsingEncoding(NSUTF8StringEncoding)
+                                        
+                                        NSURLConnection.sendAsynchronousRequest(goingPushRequest as NSURLRequest, queue: NSOperationQueue.mainQueue())
+                                        {(response, data, error) in
+                                            if let HTTPResponse = response as? NSHTTPURLResponse {
+                                                let statusCode = HTTPResponse.statusCode
+                                                if statusCode == 200 {
+                                                    print("sent going push request successfully")
+                                                }
+                                            }
+                                            else {
+                                                let alert = UIAlertController(title: "Database Error", message: "Error when trying to update hangout. Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                                                alert.addAction(UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default, handler: { action in
+                                                    self.cancel()
+                                                }))
+                                                self.presentViewController(alert, animated: true, completion: nil)
+                                            }
+                                        }
+
                                     }
                                     else if self.notGoing == 1 {
                                         if self.user_notGoing_xPos != nil {
@@ -685,6 +716,29 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
                                         if self.userGoingImage != nil {
                                             self.userGoingImage?.removeFromSuperview()
                                             self.userNotGoingImage = imageView
+                                        }
+                                        
+                                        let notGoingPushUrl: NSURL = NSURL(string: self.urlBase+"notGoingHangoutPush.php")!
+                                        let notGoingPushRequest:NSMutableURLRequest = NSMutableURLRequest(URL: notGoingPushUrl)
+                                        let notGoingPushBodyData = "id=\(self.hangoutID!)&organizer=\(self.organizer!)&user=\(self.first_name)&location=\(placeLocation)"
+                                        notGoingPushRequest.HTTPMethod = "POST"
+                                        notGoingPushRequest.HTTPBody = notGoingPushBodyData.dataUsingEncoding(NSUTF8StringEncoding)
+                                        
+                                        NSURLConnection.sendAsynchronousRequest(notGoingPushRequest as NSURLRequest, queue: NSOperationQueue.mainQueue())
+                                        {(response, data, error) in
+                                            if let HTTPResponse = response as? NSHTTPURLResponse {
+                                                let statusCode = HTTPResponse.statusCode
+                                                if statusCode == 200 {
+                                                    print("sent not going push request successfully")
+                                                }
+                                            }
+                                            else {
+                                                let alert = UIAlertController(title: "Database Error", message: "Error when trying to update hangout. Please try again.", preferredStyle: UIAlertControllerStyle.Alert)
+                                                alert.addAction(UIAlertAction(title: "Retry", style: UIAlertActionStyle.Default, handler: { action in
+                                                    self.cancel()
+                                                }))
+                                                self.presentViewController(alert, animated: true, completion: nil)
+                                            }
                                         }
                                     }
                                     
