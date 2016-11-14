@@ -242,18 +242,23 @@ class EditHangoutViewController: UIViewController, UITextFieldDelegate, GMSMapVi
                 }
             }
             
-            let reminderPushUrl: NSURL = NSURL(string: self.urlBase+"schedulePush.php")!
-            let reminderPushRequest:NSMutableURLRequest = NSMutableURLRequest(URL: reminderPushUrl)
-            let reminderPushBodyData = "location=\(location)&seconds=\(seconds)"
-            reminderPushRequest.HTTPMethod = "POST"
-            reminderPushRequest.HTTPBody = reminderPushBodyData.dataUsingEncoding(NSUTF8StringEncoding)
-            
-            NSURLConnection.sendAsynchronousRequest(reminderPushRequest as NSURLRequest, queue: NSOperationQueue.mainQueue())
-            {(response, data, error) in
-                if let HTTPResponse = response as? NSHTTPURLResponse {
-                    let statusCode = HTTPResponse.statusCode
-                    if statusCode == 200 {
-                        print("sent reminder push request successfully")
+            let tempTime = datePicker.date
+            let now = NSDate()
+            let timeInTwentyMin = now.dateByAddingTimeInterval(19.0 * 60.0)
+            if (timeInTwentyMin.laterDate(tempTime)) == tempTime {
+                let reminderPushUrl: NSURL = NSURL(string: self.urlBase+"schedulePush.php")!
+                let reminderPushRequest:NSMutableURLRequest = NSMutableURLRequest(URL: reminderPushUrl)
+                let reminderPushBodyData = "location=\(location)&seconds=\(seconds)"
+                reminderPushRequest.HTTPMethod = "POST"
+                reminderPushRequest.HTTPBody = reminderPushBodyData.dataUsingEncoding(NSUTF8StringEncoding)
+                
+                NSURLConnection.sendAsynchronousRequest(reminderPushRequest as NSURLRequest, queue: NSOperationQueue.mainQueue())
+                {(response, data, error) in
+                    if let HTTPResponse = response as? NSHTTPURLResponse {
+                        let statusCode = HTTPResponse.statusCode
+                        if statusCode == 200 {
+                            print("sent reminder push request successfully")
+                        }
                     }
                 }
             }

@@ -23,6 +23,8 @@ class pictures: NSObject {
 
 let globalPicsArray = [pictures(name: "Alan", id: "100000674808472"), pictures(name: "Rahul", id: "1050570262"), pictures(name: "Molly", id: "1553593244"), pictures(name: "Brittnie", id: "508642311"), pictures(name: "Graham", id: "571994343")]
 
+let globalNamesArray = ["Graham Turbyne", "Alan Ruiz", "Brittnie Swartchick", "Molly Summers", "Rahul Krishnakumar"]
+
 public class Reachability {
     
     class func connectedToNetwork() -> Bool {
@@ -136,7 +138,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
             if (FBSDKAccessToken.currentAccessToken() != nil)
             {
                 // User is already logged in, go to next view controller.
-                performSegueWithIdentifier("loginSuccess", sender: nil)
+                returnUserData()
             }
             else
             {
@@ -187,7 +189,7 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 {
                     // Maybe set a flag here???
                 }
-                performSegueWithIdentifier("loginSuccess", sender: nil)
+                returnUserData()
             }
         }
     }
@@ -216,6 +218,15 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 print("First name is: \(firstName)")
                 let userEmail : NSString = result.valueForKey("email") as! NSString
                 print("User Email is: \(userEmail)")
+                
+                if globalNamesArray.contains(userName as String) {
+                    self.performSegueWithIdentifier("loginSuccess", sender: nil)
+                }
+                else {
+                    let alert = UIAlertController(title: "Application Login Error", message: "Sorry, this app can only be used by those who are a part of team Grayson.", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
             }
         })
     }
