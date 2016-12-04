@@ -23,8 +23,6 @@ class pictures: NSObject {
 
 let globalPicsArray = [pictures(name: "Alan", id: "100000674808472"), pictures(name: "Rahul", id: "1050570262"), pictures(name: "Molly", id: "1553593244"), pictures(name: "Brittnie", id: "508642311"), pictures(name: "Graham", id: "571994343")]
 
-let globalNamesArray = ["Graham Turbyne", "Alan Ruiz", "Brittnie Swartchick", "Molly Summers", "Rahul Krishnakumar"]
-
 public class Reachability {
     
     class func connectedToNetwork() -> Bool {
@@ -57,79 +55,28 @@ public class Reachability {
     }
 }
 
-/*public class pointCentralization {
+protocol GetUsersProtocal: class {
+    func itemsDownloaded(items: NSArray)
+}
 
-//        /** Degrees to Radian **/
-
-    class func degreeToRadian(angle:CLLocationDegrees) -> CGFloat{
-        
-        return (  (CGFloat(angle)) / 180.0 * CGFloat(M_PI)  )
-        
-    }
-
-    //        /** Radians to Degrees **/
-
-    class func radianToDegree(radian:CGFloat) -> CLLocationDegrees{
-        
-        return CLLocationDegrees(  radian * CGFloat(180.0 / M_PI)  )
-        
-    }
-
-    class func middlePointOfListMarkers(listCoords: [CLLocationCoordinate2D]) -> CLLocationCoordinate2D{
-        
-        var x = 0.0 as CGFloat
-        
-        var y = 0.0 as CGFloat
-        
-        var z = 0.0 as CGFloat
-        
-        
-        
-        for coordinate in listCoords{
-            
-            let lat:CGFloat = degreeToRadian(coordinate.latitude)
-            
-            let lon:CGFloat = degreeToRadian(coordinate.longitude)
-            
-            x = x + cos(lat) * cos(lon)
-            
-            y = y + cos(lat) * sin(lon);
-            
-            z = z + sin(lat);
-            
-        }
-        
-        x = x/CGFloat(listCoords.count)
-        
-        y = y/CGFloat(listCoords.count)
-        
-        z = z/CGFloat(listCoords.count)
-        
-        
-        
-        let resultLon: CGFloat = atan2(y, x)
-        
-        let resultHyp: CGFloat = sqrt(x*x+y*y)
-        
-        let resultLat:CGFloat = atan2(z, resultHyp)
-        
-        
-        
-        let newLat = radianToDegree(resultLat)
-        
-        let newLon = radianToDegree(resultLon)
-        
-        let result:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: newLat, longitude: newLon)
-        
-        return result
-        
-    }
-}*/
-
-class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
-
+class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, NSURLSessionDataDelegate {
+    
+    
+    @IBOutlet weak var verifyLabel: UILabel!
+    @IBOutlet weak var verifySpinner: UIActivityIndicatorView!
+    
+    weak var delegate: GetUsersProtocal!
+    var data: NSMutableData = NSMutableData()
+    var urlPath: String = "http://10.0.0.246/get_house_members.php"
+    
+    var first: String = ""
+    var last: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.verifyLabel.hidden = true
+        self.verifySpinner.hidden = true
     }
     
     func reloadData() {
@@ -201,6 +148,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
     func returnUserData()
     {
         
+        self.verifyLabel.hidden = false
+        self.verifySpinner.hidden = false
+        
         let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, first_name, last_name"])
         graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
             
@@ -215,30 +165,93 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate {
                 let userName : NSString = result.valueForKey("name") as! NSString
                 print("User Name is: \(userName)")
                 let firstName : NSString = result.valueForKey("first_name") as! NSString
+                self.first = result.valueForKey("first_name") as! String
                 print("First name is: \(firstName)")
+                self.last = result.valueForKey("last_name") as! String
                 let userEmail : NSString = result.valueForKey("email") as! NSString
                 print("User Email is: \(userEmail)")
                 
-                if globalNamesArray.contains(userName as String) {
-                    self.performSegueWithIdentifier("loginSuccess", sender: nil)
+                self.verifyURL()
+            }
+        })
+    }
+    
+    func verifyURL() {
+        
+        let url: NSURL = NSURL(string: self.urlPath)!
+        var session: NSURLSession!
+        let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+        configuration.timeoutIntervalForRequest = 2
+        configuration.timeoutIntervalForResource = 2
+        
+        session = NSURLSession(configuration: configuration, delegate: self, delegateQueue: nil)
+        
+        let task = session.dataTaskWithURL(url)
+        
+        task.resume()
+    }
+    
+    func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
+    }
+    
+    func URLSession(session: NSURLSession, task: NSURLSessionTask, didCompleteWithError error: NSError?) {
+        if error != nil {
+            if self.urlPath == "http://10.0.0.246/get_house_members.php"{
+                self.urlPath = "http://50.156.82.136/get_house_members.php"
+                self.verifyURL()
+            }
+            else {
+                let alert = UIAlertView(title: "Connection Error", message: "There was an error connecting to the server. Please try again later.", delegate: nil, cancelButtonTitle: "Close")
+                alert.show()
+            }
+        }
+        else {
+            self.parseJSON()
+        }
+    }
+    
+    func parseJSON() {
+        
+        let url: NSURL = NSURL(string:self.urlPath)!
+        let request:NSMutableURLRequest = NSMutableURLRequest(URL:url)
+        let bodyData = "first=\(self.first)&last=\(self.last)"
+        request.HTTPMethod = "POST"
+        request.HTTPBody = bodyData.dataUsingEncoding(NSUTF8StringEncoding)
+        
+        NSURLConnection.sendAsynchronousRequest(request as NSURLRequest, queue: NSOperationQueue.mainQueue())
+        {(response, data, error) in
+            if let HTTPResponse = response as? NSHTTPURLResponse {
+                let statusCode = HTTPResponse.statusCode
+                if statusCode == 200 {
+                    let output: NSString = (NSString(data: data!, encoding: NSUTF8StringEncoding))!
+                    
+                    if let data = output.dataUsingEncoding(NSUTF8StringEncoding) {
+                        do {
+                            let ret = try NSJSONSerialization.JSONObjectWithData(data, options: []) as! [String:AnyObject]
+                            if (ret["success"] as! NSNumber) == 1 {
+                                self.verifyLabel.hidden = true
+                                self.verifySpinner.hidden = true
+                                self.performSegueWithIdentifier("loginSuccess", sender: nil)
+                            }
+                            else {
+                                let alert = UIAlertController(title: "Application Login Error", message: "Sorry, this app can only be used by those who are a part of team Grayson.", preferredStyle: UIAlertControllerStyle.Alert)
+                                alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
+                                self.presentViewController(alert, animated: true, completion: nil)
+                            }
+                            
+                        } catch let error as NSError {
+                            let alert = UIAlertController(title: "Application Login Error", message: "Sorry, there seems to be a server issue currently, please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
+                            alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
+                            self.presentViewController(alert, animated: true, completion: nil)
+                        }
+                    }
                 }
                 else {
-                    let alert = UIAlertController(title: "Application Login Error", message: "Sorry, this app can only be used by those who are a part of team Grayson.", preferredStyle: UIAlertControllerStyle.Alert)
+                    let alert = UIAlertController(title: "Application Login Error", message: "Sorry, there seems to be a server issue currently, please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
             }
-        })
+        }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
