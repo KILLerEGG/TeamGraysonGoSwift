@@ -54,6 +54,7 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
     
     var goingButton: UIButton?
     var notGoingButton: UIButton?
+    var directionsButton: UIButton?
     var cancelButton: UIButton?
     var editButton: UIButton?
     
@@ -267,6 +268,19 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
                 
                 if self.canPlaceLocation {
                     
+                    self.directionsButton = UIButton(frame: CGRect(x: 115, y: 580, width: 140, height: 50))
+                    self.directionsButton!.layer.cornerRadius = 5
+                    self.directionsButton!.layer.borderWidth = 1
+                    self.directionsButton!.layer.borderColor = UIColor(red: 244/255, green: 155/255, blue: 0/255, alpha: 1.0).CGColor
+                    self.directionsButton!.backgroundColor = UIColor.clearColor()
+                    self.directionsButton!.setTitle("Get Directions", forState: .Normal)
+                    self.directionsButton!.setTitleColor(UIColor(red: 244/255, green: 155/255, blue: 0/255, alpha: 1.0), forState: .Normal)
+                    self.directionsButton!.setTitleColor(UIColor.whiteColor(), forState: .Highlighted)
+                    self.directionsButton!.addTarget(self, action: #selector(self.changeDirectionsButtonColor), forControlEvents: UIControlEvents.TouchDown)
+                    self.directionsButton!.addTarget(self, action: #selector(self.directionsAction), forControlEvents: UIControlEvents.TouchUpInside)
+                    self.directionsButton!.addTarget(self, action: #selector(self.resetDirectionsButtonColor), forControlEvents: UIControlEvents.TouchUpOutside)
+                    self.view.addSubview(self.directionsButton!)
+                    
                     var bounds = GMSCoordinateBounds()
                     
                     bounds = bounds.includingCoordinate(marker.position)
@@ -392,7 +406,7 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
             }
             
             if self.first_name != self.organizer {
-                self.goingButton = UIButton(frame: CGRect(x: 70, y: 520, width: 100, height: 50))
+                self.goingButton = UIButton(frame: CGRect(x: 30, y: 500, width: 140, height: 50))
                 self.goingButton!.layer.cornerRadius = 5
                 self.goingButton!.layer.borderWidth = 1
                 self.goingButton!.layer.borderColor = UIColor(red: 0/255, green: 178/255, blue: 2/255, alpha: 1.0).CGColor
@@ -405,7 +419,7 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
                 self.goingButton!.addTarget(self, action: #selector(self.goingAction), forControlEvents: .TouchUpInside)
                 self.goingButton!.addTarget(self, action: #selector(self.resetGoingButtonColor), forControlEvents: .TouchUpOutside)
                 
-                self.notGoingButton = UIButton(frame: CGRect(x: 200, y: 520, width: 100, height: 50))
+                self.notGoingButton = UIButton(frame: CGRect(x: 205, y: 500, width: 140, height: 50))
                 self.notGoingButton!.layer.cornerRadius = 5
                 self.notGoingButton!.layer.borderWidth = 1
                 self.notGoingButton!.layer.borderColor = UIColor(red: 214/255, green: 57/255, blue: 57/255, alpha: 1.0).CGColor
@@ -441,7 +455,7 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
                 
             }
             else {
-                self.cancelButton = UIButton(frame: CGRect(x: 110, y: 520, width: 150, height: 50))
+                self.cancelButton = UIButton(frame: CGRect(x: 30, y: 500, width: 140, height: 50))
                 self.cancelButton!.layer.cornerRadius = 5
                 self.cancelButton!.layer.borderWidth = 1
                 self.cancelButton!.layer.borderColor = UIColor(red: 214/255, green: 57/255, blue: 57/255, alpha: 1.0).CGColor
@@ -455,7 +469,7 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
                 self.cancelButton!.addTarget(self, action: #selector(self.resetCancelButtonColor), forControlEvents: UIControlEvents.TouchUpOutside)
                 self.view.addSubview(self.cancelButton!)
                 
-                self.editButton = UIButton(frame: CGRect(x: 110, y: 580, width: 150, height: 50))
+                self.editButton = UIButton(frame: CGRect(x: 205, y: 500, width: 140, height: 50))
                 self.editButton!.layer.cornerRadius = 5
                 self.editButton!.layer.borderWidth = 1
                 self.editButton!.layer.borderColor = UIColor(red: 0.0, green:122.0/255.0, blue:1.0, alpha:1.0).CGColor
@@ -534,6 +548,30 @@ class HangoutSpecificViewController: UIViewController, NSURLSessionDelegate, Spe
     func editAction(sender: UIButton!) {
         self.editButton!.backgroundColor = UIColor.clearColor()
         self.performSegueWithIdentifier("editHangout", sender: self)
+    }
+    
+    func changeDirectionsButtonColor(sender: UIButton!) {
+        self.directionsButton!.backgroundColor = UIColor(red: 244/255, green: 155/255, blue: 0/255, alpha: 1.0)
+    }
+    
+    func resetDirectionsButtonColor(sender: UIButton!) {
+        self.directionsButton!.backgroundColor = UIColor.clearColor()
+        self.directionsButton!.layer.borderColor = UIColor(red: 244/255, green: 155/255, blue: 0/255, alpha: 1.0).CGColor
+    }
+    
+    func directionsAction(sender: UIButton!) {
+        
+        self.directionsButton!.backgroundColor = UIColor.clearColor()
+        
+        var targetURL: NSURL
+        
+        if (UIApplication.sharedApplication().canOpenURL(NSURL(string:"comgooglemaps://")!)) {
+            targetURL = NSURL(string: "comgooglemaps://?daddr=\(self.latitude),\(self.longitude)&directionsmode=driving")!
+        }
+        else {
+            targetURL = NSURL(string: "http://maps.apple.com/?daddr=\(self.latitude),\(self.longitude)")!
+        }
+        UIApplication.sharedApplication().openURL(targetURL)
     }
 
     override func didReceiveMemoryWarning() {

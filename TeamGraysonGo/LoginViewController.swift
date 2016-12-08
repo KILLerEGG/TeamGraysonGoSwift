@@ -234,12 +234,18 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, NSURLSess
                                 self.performSegueWithIdentifier("loginSuccess", sender: nil)
                             }
                             else {
+                                self.verifyLabel.hidden = true
+                                self.verifySpinner.hidden = true
+                                
                                 let alert = UIAlertController(title: "Application Login Error", message: "Sorry, this app can only be used by those who are a part of team Grayson.", preferredStyle: UIAlertControllerStyle.Alert)
                                 alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
                                 self.presentViewController(alert, animated: true, completion: nil)
                             }
                             
                         } catch let error as NSError {
+                            self.verifyLabel.hidden = true
+                            self.verifySpinner.hidden = true
+                            
                             let alert = UIAlertController(title: "Application Login Error", message: "Sorry, there seems to be a server issue currently, please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
                             alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
                             self.presentViewController(alert, animated: true, completion: nil)
@@ -247,6 +253,9 @@ class LoginViewController: UIViewController, FBSDKLoginButtonDelegate, NSURLSess
                     }
                 }
                 else {
+                    self.verifyLabel.hidden = true
+                    self.verifySpinner.hidden = true
+                    
                     let alert = UIAlertController(title: "Application Login Error", message: "Sorry, there seems to be a server issue currently, please try again later.", preferredStyle: UIAlertControllerStyle.Alert)
                     alert.addAction(UIAlertAction(title: "Close", style: UIAlertActionStyle.Default, handler: nil))
                     self.presentViewController(alert, animated: true, completion: nil)
